@@ -112,7 +112,7 @@ public class PingPongRulesImpl implements PingPongRules {
     }
 
     private void tryMoveBall(int moveY) {
-        if (!pingPongTable.isBallBouncedToWall(ball.getX() + + whichDirectionBallGoes(ball.getVerticalDirection()), ball.getY() + moveY )) {
+        if (!pingPongTable.isBallBouncedToWall(ball.getX() + whichDirectionBallGoes(ball.getVerticalDirection()), ball.getY() + moveY )) {
             ball.setX(ball.getX() + whichDirectionBallGoes(ball.getVerticalDirection()));
             ball.setY(ball.getY() + moveY);
         } else if(pingPongTable.isBallBouncedToWall(ball.getX() + whichDirectionBallGoes(ball.getVerticalDirection()), ball.getY() + moveY)) {
