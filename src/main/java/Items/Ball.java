@@ -1,10 +1,11 @@
 package Items;
 
 public class Ball {
+    public static final int STRAIGHT_DIRECTION = 2;
     private int x;
     private int y;
     private int direction;
-    public int verticalDirection;
+    private int verticalDirection;
 
     public Ball(int x, int y, int direction, int verticalDirection) {
         this.x = x;

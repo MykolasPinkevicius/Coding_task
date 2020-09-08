@@ -1,13 +1,22 @@
 package Items;
 
 public class ScoreBoard {
-    private int[] score = {0,0};
+    private int leftBatScore;
+    private int rightBatScore;
 
-    public int[] getScore() {
-        return score;
+    public int getLeftBatScore() {
+        return leftBatScore;
     }
 
-    public void setScore(int[] score) {
-        this.score = score;
+    public void setLeftBatScore(int leftBatScore) {
+        this.leftBatScore = leftBatScore;
+    }
+
+    public int getRightBatScore() {
+        return rightBatScore;
+    }
+
+    public void setRightBatScore(int rightBatScore) {
+        this.rightBatScore = rightBatScore;
     }
 }
