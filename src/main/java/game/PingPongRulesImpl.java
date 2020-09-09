@@ -45,8 +45,14 @@ public class PingPongRulesImpl implements PingPongRules {
     }
 
     @Override
-    public void changeBallDirection(Bat bat, Ball ball) {
-        if (isBallKnockedByBat(ball, bat)) {
+    public void changeBallDirection() {
+        if (isBallKnockedByBat(ball, leftBat)) {
+            if (ball.getDirection() == 1) {
+                ball.setDirection(2);
+            } else if (ball.getDirection() == 2) {
+                ball.setDirection(1);
+            }
+        } else if (isBallKnockedByBat(ball, rightBat)) {
             if (ball.getDirection() == 1) {
                 ball.setDirection(2);
             } else if (ball.getDirection() == 2) {
@@ -88,13 +94,13 @@ public class PingPongRulesImpl implements PingPongRules {
     }
 
     @Override
-    public void moveBat(char direction, Bat bat) {
+    public void moveBat(char direction) {
         switch (direction) {
             case 's':
-                tryMoveBat(1, 0, bat);
+                tryMoveBat(1, 0, leftBat);
                 break;
             case 'w' :
-                tryMoveBat(-1,0, bat);
+                tryMoveBat(-1,0, leftBat);
                 break;
         }
     }

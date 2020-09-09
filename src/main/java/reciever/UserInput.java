@@ -6,7 +6,12 @@ public class UserInput {
     public UserInput(char input) {
         this.input = input;
     }
-    public char getInput() {
+
+    public char move() {
+        return input;
+    }
+
+    public char quit() {
         return input;
     }
 }
