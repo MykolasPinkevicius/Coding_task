@@ -4,6 +4,9 @@ import Items.Ball;
 import Items.Bat;
 import Items.PingPongTable;
 import Items.ScoreBoard;
+import command.GetInputCharOperation;
+import invoker.UserInputCharExecutor;
+import reciever.UserInput;
 import util.Renderer;
 import util.Utilities;
 
@@ -11,6 +14,7 @@ import java.util.Scanner;
 
 public class StartGame {
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
         ScoreBoard score = new ScoreBoard();
         PingPongTable pingPongTable = new PingPongTable();
         Bat leftBat = new Bat(4,5,6, 1);
@@ -23,12 +27,11 @@ public class StartGame {
         renderer.drawItems(Utilities.InputCoordinatesFromObject(ball), Ball.BALL_ICON);
         renderer.drawMap();
 
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Input w to make bat go up, s to go down, q to quit game");
-        char userInput = scanner.next().charAt(0);
-        char quit = 'q';
-
-        while(userInput != quit) {
+        UserInputCharExecutor userInputCharExecutor = new UserInputCharExecutor();
+        char userInput = userInputCharExecutor.executeOperation(new GetInputCharOperation(new UserInput(scanner.next().charAt(0))));
+        final char QUIT = 'q';
+        while(userInput != QUIT) {
             renderer.clearScreen();
             pingPongRules.moveBat(userInput, leftBat);
             pingPongRules.moveBall();
@@ -46,7 +49,7 @@ public class StartGame {
             renderer.drawItems(Utilities.InputCoordinatesFromObject(ball), Ball.BALL_ICON);
             renderer.drawMap();
             System.out.println("Ball moved, Bat moved. What's your next move.\n w to go up, s to go down, q to quit");
-            userInput = scanner.next().charAt(0);
+            userInput = userInputCharExecutor.executeOperation(new GetInputCharOperation(new UserInput(scanner.next().charAt(0))));
         }
     }
 }

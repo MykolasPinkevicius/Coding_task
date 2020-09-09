@@ -20,13 +20,9 @@ public class Renderer {
     };
 
     public void drawMap() {
-        for (int row = 0; row < tableOfCharacters.length; row++) {
-            for (int col = 0; col < tableOfCharacters[row].length; col++) {
-                if (col < 1) {
-                    System.out.print("\t" + tableOfCharacters[row][col]);
-                } else {
-                    System.out.print("\t" + tableOfCharacters[row][col]);
-                }
+        for (char[] tableOfCharacter : tableOfCharacters) {
+            for (char c : tableOfCharacter) {
+                System.out.print("\t" + c);
             }
             System.out.println();
         }
