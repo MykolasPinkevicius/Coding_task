@@ -11,4 +11,6 @@ public interface PingPongRules {
     void updateScore();
     void moveBat(char direction);
     void moveBall();
+    boolean someoneScored();
+    void displayScore();
 }

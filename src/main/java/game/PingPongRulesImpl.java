@@ -116,6 +116,14 @@ public class PingPongRulesImpl implements PingPongRules {
                 break;
         }
     }
+    @Override
+    public boolean someoneScored() {
+        return pointScored(leftBat) || pointScored(rightBat);
+    }
+    @Override
+    public void displayScore() {
+        System.out.println("Ball is out: Score is " + "Left bat " + scoreBoard.getLeftBatScore() + " : " + "Right Bat " + scoreBoard.getRightBatScore());
+    }
 
     private void tryMoveBall(int moveY) {
         if (!pingPongTable.isBallBouncedToWall(ball.getX() + whichDirectionBallGoes(ball.getVerticalDirection()), ball.getY() + moveY )) {

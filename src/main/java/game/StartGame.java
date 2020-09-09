@@ -34,13 +34,6 @@ public class StartGame {
 
         while(userInput != 'q') {
             renderer.clearScreen();
-            if ( pingPongRules.pointScored(leftBat) || pingPongRules.pointScored(rightBat) ) {
-                pingPongRules.updateScore();
-                System.out.println("Ball is out: Score is " + "Left bat " + score.getLeftBatScore() + " : " + "Right Bat " + score.getRightBatScore());
-                pingPongRules.resetBallPositions();
-                pingPongRules.resetLeftBatPosition();
-                pingPongRules.resetRightBatPosition();
-            }
             renderer.drawItems(Utilities.InputCoordinatesFromObject(leftBat), Bat.BALL_ICON);
             renderer.drawItems(Utilities.InputCoordinatesFromObject(rightBat), Bat.BALL_ICON);
             renderer.drawItems(Utilities.InputCoordinatesFromObject(ball), Ball.BALL_ICON);
