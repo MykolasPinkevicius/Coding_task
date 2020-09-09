@@ -1,6 +1,7 @@
 package Items;
 
 public class Bat {
+    public static char BALL_ICON = 'R';
     private int x1;
     private int x2;
     private int x3;

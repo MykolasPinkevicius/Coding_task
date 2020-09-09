@@ -7,11 +7,10 @@ import Items.ScoreBoard;
 import util.Renderer;
 import util.Utilities;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 public class StartGame {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         ScoreBoard score = new ScoreBoard();
         PingPongTable pingPongTable = new PingPongTable();
         Bat leftBat = new Bat(4,5,6, 1);
@@ -19,7 +18,10 @@ public class StartGame {
         Ball ball = new Ball(5,7, Utilities.getRandomNumberForDirection(), Ball.STRAIGHT_DIRECTION);
         PingPongRules pingPongRules = new PingPongRulesImpl(ball, leftBat, rightBat, score, pingPongTable);
         Renderer renderer = new Renderer();
-        renderer.drawBallAndBats(leftBat, rightBat, ball, pingPongTable);
+        renderer.drawItems(Utilities.InputCoordinatesFromObject(leftBat), Bat.BALL_ICON);
+        renderer.drawItems(Utilities.InputCoordinatesFromObject(rightBat), Bat.BALL_ICON);
+        renderer.drawItems(Utilities.InputCoordinatesFromObject(ball), Ball.BALL_ICON);
+        renderer.drawMap();
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("Input w to make bat go up, s to go down, q to quit game");
@@ -27,7 +29,7 @@ public class StartGame {
         char quit = 'q';
 
         while(userInput != quit) {
-            renderer.clearBallAndBat(leftBat, rightBat, ball);
+            renderer.clearScreen();
             pingPongRules.moveBat(userInput, leftBat);
             pingPongRules.moveBall();
             if ( pingPongRules.pointScored(leftBat) || pingPongRules.pointScored(rightBat) ) {
@@ -39,7 +41,10 @@ public class StartGame {
             }
             pingPongRules.changeBallDirection(leftBat, ball);
             pingPongRules.changeBallDirection(rightBat, ball);
-            renderer.drawBallAndBats(leftBat, rightBat, ball, pingPongTable);
+            renderer.drawItems(Utilities.InputCoordinatesFromObject(leftBat), Bat.BALL_ICON);
+            renderer.drawItems(Utilities.InputCoordinatesFromObject(rightBat), Bat.BALL_ICON);
+            renderer.drawItems(Utilities.InputCoordinatesFromObject(ball), Ball.BALL_ICON);
+            renderer.drawMap();
             System.out.println("Ball moved, Bat moved. What's your next move.\n w to go up, s to go down, q to quit");
             userInput = scanner.next().charAt(0);
         }

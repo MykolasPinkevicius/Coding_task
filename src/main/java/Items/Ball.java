@@ -2,6 +2,7 @@ package Items;
 
 public class Ball {
     public static final int STRAIGHT_DIRECTION = 2;
+    public static char BALL_ICON = 'B';
     private int x;
     private int y;
     private int direction;

@@ -1,10 +1,8 @@
 package util;
 
-import Items.Ball;
-import Items.Bat;
-import Items.PingPongTable;
+import Items.Coordinate;
 
-import java.io.IOException;
+import java.util.List;
 
 public class Renderer {
 
@@ -21,7 +19,7 @@ public class Renderer {
             {'e','e','e','e','e','e','e','e','e','e','e','e','e','e','e'},
     };
 
-    public void drawMap(PingPongTable table) throws IOException {
+    public void drawMap() {
         for (int row = 0; row < tableOfCharacters.length; row++) {
             for (int col = 0; col < tableOfCharacters[row].length; col++) {
                 if (col < 1) {
@@ -34,36 +32,22 @@ public class Renderer {
         }
 
     }
-    public void drawBall(Ball ball) throws IOException {
-        tableOfCharacters[ball.getX()][ball.getY()] = 'B';
+    public void drawItems(List<Coordinate> coordinates, char icon) {
+        coordinates.forEach(coordinate -> tableOfCharacters[coordinate.getX()][coordinate.getY()] = icon);
     }
 
-    public void drawBat(Bat bat) throws IOException {
-        tableOfCharacters[bat.getX1()][bat.getY()] = 'R';
-        tableOfCharacters[bat.getX2()][bat.getY()] = 'R';
-        tableOfCharacters[bat.getX3()][bat.getY()] = 'R';
-    }
-
-    public void drawBallAndBats(Bat leftBat, Bat rightBat, Ball ball, PingPongTable pingPongTable) throws IOException {
-        drawBall(ball);
-        drawBat(leftBat);
-        drawBat(rightBat);
-        drawMap(pingPongTable);
-    }
-
-    public void clearBallAndBat(Bat leftBat, Bat rightBat, Ball ball) {
-        clearBat(leftBat);
-        clearBat(rightBat);
-        clearBall(ball);
-    }
-
-    private void clearBall(Ball ball) {
-        tableOfCharacters[ball.getX()][ball.getY()] = 'e';
-    }
-
-    private void clearBat(Bat bat) {
-        tableOfCharacters[bat.getX1()][bat.getY()] = 'e';
-        tableOfCharacters[bat.getX2()][bat.getY()] = 'e';
-        tableOfCharacters[bat.getX3()][bat.getY()] = 'e';
+    public void clearScreen() {
+        tableOfCharacters = new char[][] {
+                {'e','e','e','e','e','e','e','e','e','e','e','e','e','e','e'},
+                {'e','e','e','e','e','e','e','e','e','e','e','e','e','e','e'},
+                {'e','e','e','e','e','e','e','e','e','e','e','e','e','e','e'},
+                {'e','e','e','e','e','e','e','e','e','e','e','e','e','e','e'},
+                {'e','e','e','e','e','e','e','e','e','e','e','e','e','e','e'},
+                {'e','e','e','e','e','e','e','e','e','e','e','e','e','e','e'},
+                {'e','e','e','e','e','e','e','e','e','e','e','e','e','e','e'},
+                {'e','e','e','e','e','e','e','e','e','e','e','e','e','e','e'},
+                {'e','e','e','e','e','e','e','e','e','e','e','e','e','e','e'},
+                {'e','e','e','e','e','e','e','e','e','e','e','e','e','e','e'},
+        };
     }
 }
