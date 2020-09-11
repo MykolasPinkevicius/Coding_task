@@ -18,12 +18,12 @@ public class StartGame {
         CommandFactory commandFactory = new CommandFactory();
         Renderer renderer = new Renderer();
         Scanner scanner = new Scanner(System.in);
-        PingPongRules pingPongRules = new PingPongRulesImplBuilder(
-                new Bat(4, 5, 6, 1),
-                new Bat(4, 5, 6, 13),
-                new Ball(5, 7, Utilities.getRandomNumberForDirection(), Ball.STRAIGHT_DIRECTION),
-                new ScoreBoard(),
-                new PingPongTable())
+        PingPongRules pingPongRules = new PingPongRulesImplBuilder()
+                .setLeftBat(new Bat(4, 5, 6, 1))
+                .setRightBat(new Bat(4, 5, 6, 13))
+                .setBall(new Ball(5, 7, Utilities.getRandomNumberForDirection(), Ball.STRAIGHT_DIRECTION))
+                .setScoreBoard(new ScoreBoard())
+                .setPingPongTable(new PingPongTable())
                 .build();
         renderer.drawItems(Utilities.InputCoordinatesFromObject(pingPongRules.getLeftBat()), Bat.BALL_ICON);
         renderer.drawItems(Utilities.InputCoordinatesFromObject(pingPongRules.getRightBat()), Bat.BALL_ICON);

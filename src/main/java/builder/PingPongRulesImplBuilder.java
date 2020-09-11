@@ -13,14 +13,6 @@ public class PingPongRulesImplBuilder {
     private ScoreBoard scoreBoard;
     private PingPongTable pingPongTable;
 
-    public PingPongRulesImplBuilder(Bat leftBat, Bat rightBat, Ball ball, ScoreBoard scoreBoard, PingPongTable pingPongTable) {
-        this.leftBat = leftBat;
-        this.rightBat = rightBat;
-        this.ball = ball;
-        this.scoreBoard = scoreBoard;
-        this.pingPongTable = pingPongTable;
-    }
-
     public PingPongRulesImplBuilder setLeftBat(Bat leftBat) {
         this.leftBat = leftBat;
         return this;
