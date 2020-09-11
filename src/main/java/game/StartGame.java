@@ -34,7 +34,7 @@ public class StartGame {
         char userInput = scanner.next().charAt(0);
         commandFactory.getCommand(userInput, pingPongRules).execute();
 
-        while (userInput != 'q') {
+        while (userInput != QUIT) {
             renderer.clearScreen();
             renderer.drawItems(Utilities.InputCoordinatesFromObject(pingPongRules.getLeftBat()), Bat.BALL_ICON);
             renderer.drawItems(Utilities.InputCoordinatesFromObject(pingPongRules.getRightBat()), Bat.BALL_ICON);
