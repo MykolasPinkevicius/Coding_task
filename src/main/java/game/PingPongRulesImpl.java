@@ -4,6 +4,8 @@ import Items.Ball;
 import Items.Bat;
 import Items.PingPongTable;
 import Items.ScoreBoard;
+import builder.PingPongRulesImplBuilder;
+import util.Utilities;
 
 public class PingPongRulesImpl implements PingPongRules {
     private static final int MOVING_UP = 1;
@@ -20,6 +22,20 @@ public class PingPongRulesImpl implements PingPongRules {
         this.rightBat = rightBat;
         this.scoreBoard = scoreBoard;
         this.pingPongTable = pingPongTable;
+    }
+    @Override
+    public Ball getBall() {
+        return ball;
+    }
+
+    @Override
+    public Bat getLeftBat() {
+        return leftBat;
+    }
+
+    @Override
+    public Bat getRightBat() {
+        return rightBat;
     }
 
     public boolean isBallKnockedByBat(Ball ball, Bat bat) {
@@ -168,5 +184,8 @@ public class PingPongRulesImpl implements PingPongRules {
                 bat.setX3(bat.getX3()+moveX);
             }
         }
+    }
+    public PingPongRulesImpl getPingPongRulesImpl() {
+        return new PingPongRulesImplBuilder(new Bat(4,5,6, 1),new Bat(4,5,6,13),new Ball(5,7, Utilities.getRandomNumberForDirection(), Ball.STRAIGHT_DIRECTION),new ScoreBoard(),new PingPongTable()).build();
     }
 }

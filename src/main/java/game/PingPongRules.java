@@ -1,5 +1,6 @@
 package game;
 
+import Items.Ball;
 import Items.Bat;
 
 public interface PingPongRules {
@@ -13,4 +14,7 @@ public interface PingPongRules {
     void moveBall();
     boolean someoneScored();
     void displayScore();
+    Ball getBall();
+    Bat getLeftBat();
+    Bat getRightBat();
 }
