@@ -24,6 +24,8 @@ public class ResumeGameOperation implements UserInputOperation {
         pingPongRules.setRightBat(lastGame.getRightBat());
         pingPongRules.setPingPongTable(lastGame.getPingPongTable());
         pingPongRules.setScoreBoard(lastGame.getScoreBoard());
+        System.out.println("You resumed you last game");
+        pingPongRules.displayScore();
         in.close();
         fileIn.close();
     }
