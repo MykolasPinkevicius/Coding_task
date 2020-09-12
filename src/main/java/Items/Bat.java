@@ -1,6 +1,8 @@
 package Items;
 
-public class Bat {
+import java.io.Serializable;
+
+public class Bat implements Serializable {
     public static char BALL_ICON = 'R';
     private int x1;
     private int x2;

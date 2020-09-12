@@ -1,6 +1,8 @@
 package Items;
 
-public class ScoreBoard {
+import java.io.Serializable;
+
+public class ScoreBoard implements Serializable {
     private int leftBatScore;
     private int rightBatScore;
 

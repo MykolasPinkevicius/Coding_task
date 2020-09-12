@@ -9,10 +9,11 @@ import command.CommandFactory;
 import util.Renderer;
 import util.Utilities;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class StartGame {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
         final char QUIT = 'q';
 
         CommandFactory commandFactory = new CommandFactory();
@@ -30,7 +31,7 @@ public class StartGame {
         renderer.drawItems(Utilities.InputCoordinatesFromObject(pingPongRules.getBall()), Ball.BALL_ICON);
         renderer.drawMap();
 
-        System.out.println("Input w to make bat go up, s to go down, q to quit game");
+        System.out.println("Input w to make bat go up, s to go down, t to save the game, r tu resume the last saved game, q to quit game");
         char userInput = scanner.next().charAt(0);
         commandFactory.getCommand(userInput, pingPongRules).execute();
 
@@ -40,7 +41,7 @@ public class StartGame {
             renderer.drawItems(Utilities.InputCoordinatesFromObject(pingPongRules.getRightBat()), Bat.BALL_ICON);
             renderer.drawItems(Utilities.InputCoordinatesFromObject(pingPongRules.getBall()), Ball.BALL_ICON);
             renderer.drawMap();
-            System.out.println("Ball moved, Bat moved. What's your next move.\n w to go up, s to go down, q to quit");
+            System.out.println("Input w to make bat go up, s to go down, t to save the game, r tu resume the last saved game, q to quit game");
             userInput = scanner.next().charAt(0);
             commandFactory.getCommand(userInput, pingPongRules).execute();
         }

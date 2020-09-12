@@ -7,20 +7,44 @@ import Items.ScoreBoard;
 import builder.PingPongRulesImplBuilder;
 import util.Utilities;
 
-public class PingPongRulesImpl implements PingPongRules {
+import java.io.Serializable;
+
+public class PingPongRulesImpl implements PingPongRules, Serializable {
     private static final int MOVING_UP = 1;
     private static final int MOVING_DOWN = -1;
+
     private Ball ball;
+
     private Bat leftBat;
     private Bat rightBat;
     private ScoreBoard scoreBoard;
     private PingPongTable pingPongTable;
-
     public PingPongRulesImpl(Ball ball, Bat leftBat, Bat rightBat, ScoreBoard scoreBoard, PingPongTable pingPongTable) {
         this.ball = ball;
         this.leftBat = leftBat;
         this.rightBat = rightBat;
         this.scoreBoard = scoreBoard;
+        this.pingPongTable = pingPongTable;
+    }
+
+    @Override
+    public void setBall(Ball ball) {
+        this.ball = ball;
+    }
+    @Override
+    public void setLeftBat(Bat leftBat) {
+        this.leftBat = leftBat;
+    }
+    @Override
+    public void setRightBat(Bat rightBat) {
+        this.rightBat = rightBat;
+    }
+    @Override
+    public void setScoreBoard(ScoreBoard scoreBoard) {
+        this.scoreBoard = scoreBoard;
+    }
+    @Override
+    public void setPingPongTable(PingPongTable pingPongTable) {
         this.pingPongTable = pingPongTable;
     }
     @Override
@@ -36,6 +60,16 @@ public class PingPongRulesImpl implements PingPongRules {
     @Override
     public Bat getRightBat() {
         return rightBat;
+    }
+
+    @Override
+    public ScoreBoard getScoreBoard() {
+        return scoreBoard;
+    }
+
+    @Override
+    public PingPongTable getPingPongTable() {
+        return pingPongTable;
     }
 
     public boolean isBallKnockedByBat(Ball ball, Bat bat) {
@@ -126,7 +160,6 @@ public class PingPongRulesImpl implements PingPongRules {
                 break;
         }
     }
-
     @Override
     public void moveBall() {
         switch(ball.getDirection()){
@@ -142,6 +175,7 @@ public class PingPongRulesImpl implements PingPongRules {
     public boolean someoneScored() {
         return pointScored(leftBat) || pointScored(rightBat);
     }
+
     @Override
     public void displayScore() {
         System.out.println("Ball is out: Score is " + "Left bat " + scoreBoard.getLeftBatScore() + " : " + "Right Bat " + scoreBoard.getRightBatScore());

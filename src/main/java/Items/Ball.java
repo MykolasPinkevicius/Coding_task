@@ -1,6 +1,8 @@
 package Items;
 
-public class Ball {
+import java.io.Serializable;
+
+public class Ball implements Serializable {
     public static final int STRAIGHT_DIRECTION = 2;
     public static char BALL_ICON = 'B';
     private int x;
