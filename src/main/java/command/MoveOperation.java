@@ -16,6 +16,7 @@ public class MoveOperation implements UserInputOperation {
         pingPongRules.moveBall();
         pingPongRules.moveBat(userInput);
         pingPongRules.changeBallDirection();
+        pingPongRules.moveNPCBat();
         if (pingPongRules.someoneScored()) {
             pingPongRules.updateScore();
             pingPongRules.displayScore();

@@ -14,6 +14,7 @@ public interface PingPongRules {
     void moveBall();
     boolean someoneScored();
     void displayScore();
+    void moveNPCBat();
     Ball getBall();
     Bat getLeftBat();
     Bat getRightBat();

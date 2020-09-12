@@ -63,17 +63,23 @@ public class PingPongRulesImpl implements PingPongRules {
     @Override
     public void changeBallDirection() {
         if (isBallKnockedByBat(ball, leftBat)) {
-            if (ball.getDirection() == 1) {
-                ball.setDirection(2);
-            } else if (ball.getDirection() == 2) {
-                ball.setDirection(1);
-            }
+            changeBallVerticalDirection();
+            tryChangeBallDirection();
         } else if (isBallKnockedByBat(ball, rightBat)) {
-            if (ball.getDirection() == 1) {
-                ball.setDirection(2);
-            } else if (ball.getDirection() == 2) {
-                ball.setDirection(1);
-            }
+            tryChangeBallDirection();
+            changeBallVerticalDirection();
+        }
+    }
+
+    private void changeBallVerticalDirection() {
+        ball.setVerticalDirection(Utilities.getRandomBUmberForVerticalDirection());
+    }
+
+    private void tryChangeBallDirection() {
+        if (ball.getDirection() == 1) {
+            ball.setDirection(2);
+        } else if (ball.getDirection() == 2) {
+            ball.setDirection(1);
         }
     }
 
@@ -141,12 +147,26 @@ public class PingPongRulesImpl implements PingPongRules {
         System.out.println("Ball is out: Score is " + "Left bat " + scoreBoard.getLeftBatScore() + " : " + "Right Bat " + scoreBoard.getRightBatScore());
     }
 
+    @Override
+    public void moveNPCBat() {
+        if (ball.getX() > rightBat.getX2()) {
+            rightBat.setX1(rightBat.getX1() + MOVING_UP);
+            rightBat.setX2(rightBat.getX2() + MOVING_UP);
+            rightBat.setX3(rightBat.getX3() + MOVING_UP);
+        } else if (ball.getX() < rightBat.getX2()) {
+            rightBat.setX1(rightBat.getX1() + MOVING_DOWN);
+            rightBat.setX2(rightBat.getX2() + MOVING_DOWN);
+            rightBat.setX3(rightBat.getX3() + MOVING_DOWN);
+        }
+    }
+
     private void tryMoveBall(int moveY) {
         if (!pingPongTable.isBallBouncedToWall(ball.getX() + whichDirectionBallGoes(ball.getVerticalDirection()), ball.getY() + moveY )) {
             ball.setX(ball.getX() + whichDirectionBallGoes(ball.getVerticalDirection()));
             ball.setY(ball.getY() + moveY);
         } else if(pingPongTable.isBallBouncedToWall(ball.getX() + whichDirectionBallGoes(ball.getVerticalDirection()), ball.getY() + moveY)) {
             if (ball.getVerticalDirection() == 3) {
+                ball.setVerticalDirection(1);
                 ball.setX(ball.getX() + whichDirectionBallGoes(ball.getVerticalDirection()));
                 ball.setY(ball.getY() + moveY);
             } else if (ball.getVerticalDirection() == 1) {
@@ -184,8 +204,5 @@ public class PingPongRulesImpl implements PingPongRules {
                 bat.setX3(bat.getX3()+moveX);
             }
         }
-    }
-    public PingPongRulesImpl getPingPongRulesImpl() {
-        return new PingPongRulesImplBuilder(new Bat(4,5,6, 1),new Bat(4,5,6,13),new Ball(5,7, Utilities.getRandomNumberForDirection(), Ball.STRAIGHT_DIRECTION),new ScoreBoard(),new PingPongTable()).build();
     }
 }
