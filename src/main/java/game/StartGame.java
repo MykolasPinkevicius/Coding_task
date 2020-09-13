@@ -31,7 +31,7 @@ public class StartGame {
         renderer.drawItems(Utilities.InputCoordinatesFromObject(pingPongRules.getBall()), Ball.BALL_ICON);
         renderer.drawMap();
 
-        System.out.println("Input w to make bat go up, s to go down, t to save the game, r tu resume the last saved game, q to quit game");
+        System.out.println("Input w to make bat go up, s to go down, f to skip move, \nt to save the game, r tu resume the last saved game, q to quit game");
         char userInput = scanner.next().charAt(0);
         commandFactory.getCommand(userInput, pingPongRules).execute();
 
@@ -41,7 +41,7 @@ public class StartGame {
             renderer.drawItems(Utilities.InputCoordinatesFromObject(pingPongRules.getRightBat()), Bat.BALL_ICON);
             renderer.drawItems(Utilities.InputCoordinatesFromObject(pingPongRules.getBall()), Ball.BALL_ICON);
             renderer.drawMap();
-            System.out.println("Input w to make bat go up, s to go down, t to save the game, r tu resume the last saved game, q to quit game");
+            System.out.println("Input w to make bat go up, s to go down, f to skip move, \nt to save the game, r tu resume the last saved game, q to quit game");
             userInput = scanner.next().charAt(0);
             commandFactory.getCommand(userInput, pingPongRules).execute();
         }

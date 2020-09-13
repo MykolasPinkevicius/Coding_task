@@ -12,6 +12,8 @@ public class CommandFactory {
             return new SaveGameOperation(pingPongRules);
         } else if ('r' == userInput) {
             return new ResumeGameOperation(pingPongRules);
+        } else if ('f' == userInput) {
+            return new SkipMoveOperation(pingPongRules);
         } else {
             System.out.println("Please choose correct command\nw to go up, s to go down, q too legit to quit");
         }
