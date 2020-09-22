@@ -6,7 +6,9 @@ public class CommandFactory {
     public UserInputOperation getCommand(char userInput, PingPongRules pingPongRules) {
         switch(userInput) {
             case 'w':
-                return new MoveOperation(userInput, pingPongRules);
+                return new MoveBatUpOperation(pingPongRules);
+            case 's':
+                return new MoveBatDownOperation(pingPongRules);
             case 'q':
                 return new QuitGameOperation();
             case 't':

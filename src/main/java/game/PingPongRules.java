@@ -17,7 +17,10 @@ public interface PingPongRules {
     void resetLeftBatPosition();
     void resetRightBatPosition();
     void updateScore();
+    void moveBatUp();
+    void moveBatDown();
     void moveBat(char direction);
+    void skipMove();
     void moveBall();
     boolean someoneScored();
     void displayScore();

@@ -4,7 +4,6 @@ import Items.Ball;
 import Items.Bat;
 import Items.PingPongTable;
 import Items.ScoreBoard;
-import builder.PingPongRulesImplBuilder;
 import util.Utilities;
 
 import java.io.Serializable;
@@ -150,6 +149,36 @@ public class PingPongRulesImpl implements PingPongRules, Serializable {
     }
 
     @Override
+    public void moveBatUp() {
+        moveBall();
+        moveBat('w');
+        changeBallDirection();
+        moveNPCBat();
+        if (someoneScored()) {
+            updateScore();
+            displayScore();
+            resetBallPositions();
+            resetLeftBatPosition();
+            resetRightBatPosition();
+        }
+    }
+
+    @Override
+    public void moveBatDown() {
+        moveBall();
+        moveBat('s');
+        changeBallDirection();
+        moveNPCBat();
+        if (someoneScored()) {
+            updateScore();
+            displayScore();
+            resetBallPositions();
+            resetLeftBatPosition();
+            resetRightBatPosition();
+        }
+    }
+
+    @Override
     public void moveBat(char direction) {
         switch (direction) {
             case 's':
@@ -160,6 +189,21 @@ public class PingPongRulesImpl implements PingPongRules, Serializable {
                 break;
         }
     }
+
+    @Override
+    public void skipMove() {
+        moveBall();
+        changeBallDirection();
+        moveNPCBat();
+        if (someoneScored()) {
+            updateScore();
+            displayScore();
+            resetBallPositions();
+            resetLeftBatPosition();
+            resetRightBatPosition();
+        }
+    }
+
     @Override
     public void moveBall() {
         switch(ball.getDirection()){
