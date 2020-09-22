@@ -6,7 +6,7 @@ import models.Ball;
 import models.Bat;
 import models.PingPongTable;
 import models.ScoreBoard;
-import util.Renderer;
+import render.Renderer;
 import util.Utilities;
 
 import java.io.IOException;
