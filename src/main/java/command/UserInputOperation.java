@@ -1,6 +1,5 @@
 package command;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 @FunctionalInterface

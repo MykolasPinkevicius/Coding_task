@@ -11,15 +11,6 @@ public class SkipMoveOperation implements UserInputOperation {
 
     @Override
     public void execute() {
-        pingPongRules.moveBall();
-        pingPongRules.changeBallDirection();
-        pingPongRules.moveNPCBat();
-        if (pingPongRules.someoneScored()) {
-            pingPongRules.updateScore();
-            pingPongRules.displayScore();
-            pingPongRules.resetBallPositions();
-            pingPongRules.resetLeftBatPosition();
-            pingPongRules.resetRightBatPosition();
-        }
+        pingPongRules.skipMove();
     }
 }
