@@ -105,7 +105,7 @@ public class PingPongRulesImpl implements PingPongRules, Serializable {
     }
 
     private void changeBallVerticalDirection() {
-        ball.setVerticalDirection(Utilities.getRandomBUmberForVerticalDirection());
+        ball.setVerticalDirection(Utilities.getRandomNumberForVerticalDirection());
     }
 
     private void tryChangeBallDirection() {

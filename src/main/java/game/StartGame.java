@@ -10,6 +10,7 @@ import render.Renderer;
 import util.Utilities;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Scanner;
 
 public class StartGame {
@@ -26,21 +27,14 @@ public class StartGame {
                 .setScoreBoard(new ScoreBoard())
                 .setPingPongTable(new PingPongTable())
                 .build();
-        renderer.drawItems(Utilities.inputCoordinatesFromObject(pingPongRules.getLeftBat()), Bat.BALL_ICON);
-        renderer.drawItems(Utilities.inputCoordinatesFromObject(pingPongRules.getRightBat()), Bat.BALL_ICON);
-        renderer.drawItems(Utilities.inputCoordinatesFromObject(pingPongRules.getBall()), Ball.BALL_ICON);
-        renderer.drawMap();
+        renderer.drawMap(List.of(pingPongRules.getLeftBat(), pingPongRules.getRightBat(), pingPongRules.getBall()));
 
         System.out.println("Input 'w' to make bat go up, 's' to go down, 'f' to skip move, \n't' to save the game, 'r' to resume the last saved game, 'q' to quit game");
         char userInput = scanner.next().charAt(0);
         commandFactory.getCommand(userInput, pingPongRules).execute();
 
         while (userInput != QUIT) {
-            renderer.clearScreen();
-            renderer.drawItems(Utilities.inputCoordinatesFromObject(pingPongRules.getLeftBat()), Bat.BALL_ICON);
-            renderer.drawItems(Utilities.inputCoordinatesFromObject(pingPongRules.getRightBat()), Bat.BALL_ICON);
-            renderer.drawItems(Utilities.inputCoordinatesFromObject(pingPongRules.getBall()), Ball.BALL_ICON);
-            renderer.drawMap();
+            renderer.drawMap(List.of(pingPongRules.getLeftBat(), pingPongRules.getRightBat(), pingPongRules.getBall()));
             System.out.println("Input 'w' to make bat go up, 's' to go down, 'f' to skip move, \n't' to save the game, 'r' to resume the last saved game, 'q' to quit game");
             userInput = scanner.next().charAt(0);
             commandFactory.getCommand(userInput, pingPongRules).execute();

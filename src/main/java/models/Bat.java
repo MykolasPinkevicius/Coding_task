@@ -1,9 +1,10 @@
 package models;
 
+import render.Drawable;
+
 import java.io.Serializable;
 
-public class Bat implements Serializable {
-    public static char BALL_ICON = 'R';
+public class Bat implements Serializable, Drawable {
     private int x1;
     private int x2;
     private int x3;
@@ -46,5 +47,30 @@ public class Bat implements Serializable {
 
     public void setY(int y) {
         this.y = y;
+    }
+
+    @Override
+    public int getStartingDrawingPointX() {
+        return getX1();
+    }
+
+    @Override
+    public int getStartingDrawingPointY() {
+        return getY();
+    }
+
+    @Override
+    public int getFinishingDrawingPointX() {
+        return getX3();
+    }
+
+    @Override
+    public int getFinishingDrawingPointY() {
+        return getY();
+    }
+
+    @Override
+    public char getIcon() {
+        return '\u25A0';
     }
 }

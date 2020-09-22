@@ -1,11 +1,5 @@
 package util;
 
-import models.Ball;
-import models.Bat;
-import models.Coordinate;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Utilities {
 
@@ -18,20 +12,7 @@ public class Utilities {
         return (int) Math.random() * (DIRECTION_RIGHT - DIRECTION_LEFT + 1) + DIRECTION_LEFT;
     }
 
-    public static List<Coordinate> inputCoordinatesFromObject(Ball ball) {
-        List<Coordinate> coordinates = new ArrayList<>();
-        coordinates.add(new Coordinate(ball.getX(),ball.getY()));
-        return coordinates;
-    }
-    public static List<Coordinate> inputCoordinatesFromObject(Bat bat) {
-        List<Coordinate> coordinates = new ArrayList<>();
-        coordinates.add(new Coordinate(bat.getX1(), bat.getY()));
-        coordinates.add(new Coordinate(bat.getX2(), bat.getY()));
-        coordinates.add(new Coordinate(bat.getX3(), bat.getY()));
-        return coordinates;
-    }
-
-    public static int getRandomBUmberForVerticalDirection() {
+    public static int getRandomNumberForVerticalDirection() {
         return (int) Math.random() * (VERTICAL_DIRECTION_UP - VERTICAL_DIRECTION_DOWN + 1) + VERTICAL_DIRECTION_DOWN;
     }
 }

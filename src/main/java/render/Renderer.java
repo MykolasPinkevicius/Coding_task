@@ -1,49 +1,32 @@
 package render;
 
-import models.Coordinate;
 
 import java.util.List;
 
 public class Renderer {
+    public void drawMap(List<Drawable> drawables) {
+        char[][] pingPongTableDimensions = new char[10][15];
+        loadDrawables(drawables, pingPongTableDimensions);
+        drawDrawables(pingPongTableDimensions);
 
-    private char[][] tableOfCharacters = {
-            {'e','e','e','e','e','e','e','e','e','e','e','e','e','e','e'},
-            {'e','e','e','e','e','e','e','e','e','e','e','e','e','e','e'},
-            {'e','e','e','e','e','e','e','e','e','e','e','e','e','e','e'},
-            {'e','e','e','e','e','e','e','e','e','e','e','e','e','e','e'},
-            {'e','e','e','e','e','e','e','e','e','e','e','e','e','e','e'},
-            {'e','e','e','e','e','e','e','e','e','e','e','e','e','e','e'},
-            {'e','e','e','e','e','e','e','e','e','e','e','e','e','e','e'},
-            {'e','e','e','e','e','e','e','e','e','e','e','e','e','e','e'},
-            {'e','e','e','e','e','e','e','e','e','e','e','e','e','e','e'},
-            {'e','e','e','e','e','e','e','e','e','e','e','e','e','e','e'},
-    };
+    }
 
-    public void drawMap() {
-        for (char[] tableOfCharacter : tableOfCharacters) {
-            for (char c : tableOfCharacter) {
+    private void drawDrawables(char[][] pingPongTableDimensions) {
+        for (char[] pingPongTableDimension : pingPongTableDimensions) {
+            for (char c : pingPongTableDimension) {
                 System.out.print("\t" + c);
             }
             System.out.println();
         }
-
-    }
-    public void drawItems(List<Coordinate> coordinates, char icon) {
-        coordinates.forEach(coordinate -> tableOfCharacters[coordinate.getX()][coordinate.getY()] = icon);
     }
 
-    public void clearScreen() {
-        tableOfCharacters = new char[][] {
-                {'e','e','e','e','e','e','e','e','e','e','e','e','e','e','e'},
-                {'e','e','e','e','e','e','e','e','e','e','e','e','e','e','e'},
-                {'e','e','e','e','e','e','e','e','e','e','e','e','e','e','e'},
-                {'e','e','e','e','e','e','e','e','e','e','e','e','e','e','e'},
-                {'e','e','e','e','e','e','e','e','e','e','e','e','e','e','e'},
-                {'e','e','e','e','e','e','e','e','e','e','e','e','e','e','e'},
-                {'e','e','e','e','e','e','e','e','e','e','e','e','e','e','e'},
-                {'e','e','e','e','e','e','e','e','e','e','e','e','e','e','e'},
-                {'e','e','e','e','e','e','e','e','e','e','e','e','e','e','e'},
-                {'e','e','e','e','e','e','e','e','e','e','e','e','e','e','e'},
-        };
+    private void loadDrawables(List<Drawable> drawables, char[][] pingPongTableDimensions) {
+        for (Drawable drawable:drawables) {
+            for(int i = drawable.getStartingDrawingPointX();i <= drawable.getFinishingDrawingPointX();i++) {
+                for (int j = drawable.getStartingDrawingPointY(); j <= drawable.getFinishingDrawingPointY(); j++) {
+                   pingPongTableDimensions[i][j] = drawable.getIcon();
+                }
+            }
+        }
     }
 }
