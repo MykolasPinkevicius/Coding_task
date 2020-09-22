@@ -23,7 +23,7 @@ public class StartGame {
         PingPongRules pingPongRules = new PingPongRulesImplBuilder()
                 .setLeftBat(new Bat(4, 5, 6, 1))
                 .setRightBat(new Bat(4, 5, 6, 13))
-                .setBall(new Ball(5, 7, Utilities.getRandomNumberForDirection(), Ball.STRAIGHT_DIRECTION))
+                .setBall(new Ball(5, 7, Utilities.getRandomNumberForDirection(), Utilities.getRandomNumberForVerticalDirection()))
                 .setScoreBoard(new ScoreBoard())
                 .setPingPongTable(new PingPongTable())
                 .build();
