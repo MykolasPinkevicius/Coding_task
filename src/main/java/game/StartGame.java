@@ -1,11 +1,11 @@
 package game;
 
-import Items.Ball;
-import Items.Bat;
-import Items.PingPongTable;
-import Items.ScoreBoard;
 import builder.PingPongRulesImplBuilder;
 import command.CommandFactory;
+import models.Ball;
+import models.Bat;
+import models.PingPongTable;
+import models.ScoreBoard;
 import util.Renderer;
 import util.Utilities;
 

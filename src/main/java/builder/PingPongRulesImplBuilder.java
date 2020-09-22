@@ -1,10 +1,10 @@
 package builder;
 
-import Items.Ball;
-import Items.Bat;
-import Items.PingPongTable;
-import Items.ScoreBoard;
 import game.PingPongRulesImpl;
+import models.Ball;
+import models.Bat;
+import models.PingPongTable;
+import models.ScoreBoard;
 
 public class PingPongRulesImplBuilder {
     private Bat leftBat;

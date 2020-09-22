@@ -1,8 +1,8 @@
 package util;
 
-import Items.Ball;
-import Items.Bat;
-import Items.Coordinate;
+import models.Ball;
+import models.Bat;
+import models.Coordinate;
 
 import java.util.ArrayList;
 import java.util.List;

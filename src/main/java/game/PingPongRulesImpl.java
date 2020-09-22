@@ -1,9 +1,9 @@
 package game;
 
-import Items.Ball;
-import Items.Bat;
-import Items.PingPongTable;
-import Items.ScoreBoard;
+import models.Ball;
+import models.Bat;
+import models.PingPongTable;
+import models.ScoreBoard;
 import util.Utilities;
 
 import java.io.Serializable;

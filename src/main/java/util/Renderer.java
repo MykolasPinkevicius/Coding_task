@@ -1,6 +1,6 @@
 package util;
 
-import Items.Coordinate;
+import models.Coordinate;
 
 import java.util.List;
 
