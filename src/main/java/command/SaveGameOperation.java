@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 
 public class SaveGameOperation implements UserInputOperation {
+    public static final String SAVED_GAME_FILE = "game.ser";
     private PingPongRules pingPongRules;
 
     public SaveGameOperation(PingPongRules pingPongRules) {
@@ -15,7 +16,7 @@ public class SaveGameOperation implements UserInputOperation {
 
     @Override
     public void execute() throws IOException {
-        FileOutputStream fileOut = new FileOutputStream("game.ser");
+        FileOutputStream fileOut = new FileOutputStream(SAVED_GAME_FILE);
         ObjectOutputStream out = new ObjectOutputStream(fileOut);
         out.writeObject(pingPongRules);
         out.close();
