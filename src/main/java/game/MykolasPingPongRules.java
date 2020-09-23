@@ -8,7 +8,7 @@ import util.Utilities;
 
 import java.io.Serializable;
 
-public class PingPongRulesImpl implements PingPongRules, Serializable {
+public class MykolasPingPongRules implements PingPongRules, Serializable {
     private static final int MOVING_UP = 1;
     private static final int MOVING_DOWN = -1;
 
@@ -18,7 +18,7 @@ public class PingPongRulesImpl implements PingPongRules, Serializable {
     private Bat rightBat;
     private ScoreBoard scoreBoard;
     private PingPongTable pingPongTable;
-    public PingPongRulesImpl(Ball ball, Bat leftBat, Bat rightBat, ScoreBoard scoreBoard, PingPongTable pingPongTable) {
+    public MykolasPingPongRules(Ball ball, Bat leftBat, Bat rightBat, ScoreBoard scoreBoard, PingPongTable pingPongTable) {
         this.ball = ball;
         this.leftBat = leftBat;
         this.rightBat = rightBat;

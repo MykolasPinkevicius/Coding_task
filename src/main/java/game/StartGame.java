@@ -1,6 +1,6 @@
 package game;
 
-import builder.PingPongRulesImplBuilder;
+import builder.MykolasPingPongRulesBuilder;
 import command.CommandFactory;
 import models.Ball;
 import models.Bat;
@@ -16,11 +16,10 @@ import java.util.Scanner;
 public class StartGame {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         final char QUIT = 'q';
-
         CommandFactory commandFactory = new CommandFactory();
         Renderer renderer = new Renderer();
         Scanner scanner = new Scanner(System.in);
-        PingPongRules pingPongRules = new PingPongRulesImplBuilder()
+        PingPongRules pingPongRules = new MykolasPingPongRulesBuilder()
                 .setLeftBat(new Bat(4, 5, 6, 1))
                 .setRightBat(new Bat(4, 5, 6, 13))
                 .setBall(new Ball(5, 7, Utilities.getRandomNumberForDirection(), Utilities.getRandomNumberForVerticalDirection()))

@@ -1,39 +1,39 @@
 package builder;
 
-import game.PingPongRulesImpl;
+import game.MykolasPingPongRules;
 import models.Ball;
 import models.Bat;
 import models.PingPongTable;
 import models.ScoreBoard;
 
-public class PingPongRulesImplBuilder {
+public class MykolasPingPongRulesBuilder {
     private Bat leftBat;
     private Bat rightBat;
     private Ball ball;
     private ScoreBoard scoreBoard;
     private PingPongTable pingPongTable;
 
-    public PingPongRulesImplBuilder setLeftBat(Bat leftBat) {
+    public MykolasPingPongRulesBuilder setLeftBat(Bat leftBat) {
         this.leftBat = leftBat;
         return this;
     }
-    public PingPongRulesImplBuilder setRightBat(Bat rightBat) {
+    public MykolasPingPongRulesBuilder setRightBat(Bat rightBat) {
         this.rightBat = rightBat;
         return this;
     }
-    public PingPongRulesImplBuilder setBall(Ball ball) {
+    public MykolasPingPongRulesBuilder setBall(Ball ball) {
         this.ball = ball;
         return this;
     }
-    public PingPongRulesImplBuilder setScoreBoard(ScoreBoard scoreBoard) {
+    public MykolasPingPongRulesBuilder setScoreBoard(ScoreBoard scoreBoard) {
         this.scoreBoard = scoreBoard;
         return this;
     }
-    public PingPongRulesImplBuilder setPingPongTable(PingPongTable pingPongTable) {
+    public MykolasPingPongRulesBuilder setPingPongTable(PingPongTable pingPongTable) {
         this.pingPongTable = pingPongTable;
         return this;
     }
-    public PingPongRulesImpl build() {
-        return new PingPongRulesImpl(ball,leftBat,rightBat,scoreBoard,pingPongTable);
+    public MykolasPingPongRules build() {
+        return new MykolasPingPongRules(ball,leftBat,rightBat,scoreBoard,pingPongTable);
     }
 }

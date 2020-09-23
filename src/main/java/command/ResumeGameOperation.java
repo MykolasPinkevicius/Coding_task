@@ -1,7 +1,7 @@
 package command;
 
+import game.MykolasPingPongRules;
 import game.PingPongRules;
-import game.PingPongRulesImpl;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -19,7 +19,7 @@ public class ResumeGameOperation implements UserInputOperation {
     public void execute() throws IOException, ClassNotFoundException {
         FileInputStream fileIn = new FileInputStream(SAVED_GAME_FILE);
         ObjectInputStream in = new ObjectInputStream(fileIn);
-        PingPongRulesImpl lastGame = (PingPongRulesImpl) in.readObject();
+        MykolasPingPongRules lastGame = (MykolasPingPongRules) in.readObject();
         pingPongRules.returnLastGameData(lastGame);
         in.close();
         fileIn.close();
