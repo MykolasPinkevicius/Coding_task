@@ -20,6 +20,7 @@ public interface PingPongRules {
     void moveBatUp();
     void moveBatDown();
     void moveBat(char direction);
+    void returnLastGameData(PingPongRules pingPongRules);
     void skipMove();
     void moveBall();
     boolean someoneScored();

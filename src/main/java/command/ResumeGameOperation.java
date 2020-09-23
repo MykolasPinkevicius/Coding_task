@@ -20,18 +20,8 @@ public class ResumeGameOperation implements UserInputOperation {
         FileInputStream fileIn = new FileInputStream(SAVED_GAME_FILE);
         ObjectInputStream in = new ObjectInputStream(fileIn);
         PingPongRulesImpl lastGame = (PingPongRulesImpl) in.readObject();
-        returnLastGameData(lastGame);
+        pingPongRules.returnLastGameData(lastGame);
         in.close();
         fileIn.close();
-    }
-
-    private void returnLastGameData(PingPongRulesImpl lastGame) {
-        pingPongRules.setBall(lastGame.getBall());
-        pingPongRules.setLeftBat(lastGame.getLeftBat());
-        pingPongRules.setRightBat(lastGame.getRightBat());
-        pingPongRules.setPingPongTable(lastGame.getPingPongTable());
-        pingPongRules.setScoreBoard(lastGame.getScoreBoard());
-        System.out.println("You resumed your last game");
-        pingPongRules.displayScore();
     }
 }

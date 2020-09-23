@@ -50,22 +50,18 @@ public class PingPongRulesImpl implements PingPongRules, Serializable {
     public Ball getBall() {
         return ball;
     }
-
     @Override
     public Bat getLeftBat() {
         return leftBat;
     }
-
     @Override
     public Bat getRightBat() {
         return rightBat;
     }
-
     @Override
     public ScoreBoard getScoreBoard() {
         return scoreBoard;
     }
-
     @Override
     public PingPongTable getPingPongTable() {
         return pingPongTable;
@@ -188,6 +184,17 @@ public class PingPongRulesImpl implements PingPongRules, Serializable {
                 tryMoveBat(-1,0, leftBat);
                 break;
         }
+    }
+
+    @Override
+    public void returnLastGameData(PingPongRules lastGame) {
+        setBall(lastGame.getBall());
+        setLeftBat(lastGame.getLeftBat());
+        setRightBat(lastGame.getRightBat());
+        setPingPongTable(lastGame.getPingPongTable());
+        setScoreBoard(lastGame.getScoreBoard());
+        System.out.println("You resumed your last game");
+        displayScore();
     }
 
     @Override
