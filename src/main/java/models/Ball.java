@@ -5,7 +5,7 @@ import render.Drawable;
 import java.io.Serializable;
 
 public class Ball implements Serializable, Drawable {
-    public static final int STRAIGHT_DIRECTION = 2;
+    public static final char BALL_ICON = '\u25CF';
     private int x;
     private int y;
     private int direction;
@@ -72,6 +72,6 @@ public class Ball implements Serializable, Drawable {
 
     @Override
     public char getIcon() {
-        return '\u25CF';
+        return BALL_ICON;
     }
 }

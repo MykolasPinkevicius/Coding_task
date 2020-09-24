@@ -5,6 +5,7 @@ import render.Drawable;
 import java.io.Serializable;
 
 public class Bat implements Serializable, Drawable {
+    public static final char BAT_ICON = '\u25A0';
     private int x1;
     private int x2;
     private int x3;
@@ -71,6 +72,6 @@ public class Bat implements Serializable, Drawable {
 
     @Override
     public char getIcon() {
-        return '\u25A0';
+        return BAT_ICON;
     }
 }
