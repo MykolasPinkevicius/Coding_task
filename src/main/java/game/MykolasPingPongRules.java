@@ -1,25 +1,70 @@
 package game;
 
-import Items.Ball;
-import Items.Bat;
-import Items.PingPongTable;
-import Items.ScoreBoard;
+import models.Ball;
+import models.Bat;
+import models.PingPongTable;
+import models.ScoreBoard;
+import util.Utilities;
 
-public class PingPongRulesImpl implements PingPongRules {
+import java.io.Serializable;
+
+public class MykolasPingPongRules implements PingPongRules, Serializable {
     private static final int MOVING_UP = 1;
     private static final int MOVING_DOWN = -1;
+
     private Ball ball;
+
     private Bat leftBat;
     private Bat rightBat;
     private ScoreBoard scoreBoard;
     private PingPongTable pingPongTable;
-
-    public PingPongRulesImpl(Ball ball, Bat leftBat, Bat rightBat, ScoreBoard scoreBoard, PingPongTable pingPongTable) {
+    public MykolasPingPongRules(Ball ball, Bat leftBat, Bat rightBat, ScoreBoard scoreBoard, PingPongTable pingPongTable) {
         this.ball = ball;
         this.leftBat = leftBat;
         this.rightBat = rightBat;
         this.scoreBoard = scoreBoard;
         this.pingPongTable = pingPongTable;
+    }
+
+    @Override
+    public void setBall(Ball ball) {
+        this.ball = ball;
+    }
+    @Override
+    public void setLeftBat(Bat leftBat) {
+        this.leftBat = leftBat;
+    }
+    @Override
+    public void setRightBat(Bat rightBat) {
+        this.rightBat = rightBat;
+    }
+    @Override
+    public void setScoreBoard(ScoreBoard scoreBoard) {
+        this.scoreBoard = scoreBoard;
+    }
+    @Override
+    public void setPingPongTable(PingPongTable pingPongTable) {
+        this.pingPongTable = pingPongTable;
+    }
+    @Override
+    public Ball getBall() {
+        return ball;
+    }
+    @Override
+    public Bat getLeftBat() {
+        return leftBat;
+    }
+    @Override
+    public Bat getRightBat() {
+        return rightBat;
+    }
+    @Override
+    public ScoreBoard getScoreBoard() {
+        return scoreBoard;
+    }
+    @Override
+    public PingPongTable getPingPongTable() {
+        return pingPongTable;
     }
 
     public boolean isBallKnockedByBat(Ball ball, Bat bat) {
@@ -47,17 +92,23 @@ public class PingPongRulesImpl implements PingPongRules {
     @Override
     public void changeBallDirection() {
         if (isBallKnockedByBat(ball, leftBat)) {
-            if (ball.getDirection() == 1) {
-                ball.setDirection(2);
-            } else if (ball.getDirection() == 2) {
-                ball.setDirection(1);
-            }
+            changeBallVerticalDirection();
+            tryChangeBallDirection();
         } else if (isBallKnockedByBat(ball, rightBat)) {
-            if (ball.getDirection() == 1) {
-                ball.setDirection(2);
-            } else if (ball.getDirection() == 2) {
-                ball.setDirection(1);
-            }
+            tryChangeBallDirection();
+            changeBallVerticalDirection();
+        }
+    }
+
+    private void changeBallVerticalDirection() {
+        ball.setVerticalDirection(Utilities.getRandomNumberForVerticalDirection());
+    }
+
+    private void tryChangeBallDirection() {
+        if (ball.getDirection() == 1) {
+            ball.setDirection(2);
+        } else if (ball.getDirection() == 2) {
+            ball.setDirection(1);
         }
     }
 
@@ -94,6 +145,36 @@ public class PingPongRulesImpl implements PingPongRules {
     }
 
     @Override
+    public void moveBatUp() {
+        moveBall();
+        moveBat('w');
+        changeBallDirection();
+        moveNPCBat();
+        if (someoneScored()) {
+            updateScore();
+            displayScore();
+            resetBallPositions();
+            resetLeftBatPosition();
+            resetRightBatPosition();
+        }
+    }
+
+    @Override
+    public void moveBatDown() {
+        moveBall();
+        moveBat('s');
+        changeBallDirection();
+        moveNPCBat();
+        if (someoneScored()) {
+            updateScore();
+            displayScore();
+            resetBallPositions();
+            resetLeftBatPosition();
+            resetRightBatPosition();
+        }
+    }
+
+    @Override
     public void moveBat(char direction) {
         switch (direction) {
             case 's':
@@ -102,6 +183,31 @@ public class PingPongRulesImpl implements PingPongRules {
             case 'w' :
                 tryMoveBat(-1,0, leftBat);
                 break;
+        }
+    }
+
+    @Override
+    public void returnLastGameData(PingPongRules lastGame) {
+        setBall(lastGame.getBall());
+        setLeftBat(lastGame.getLeftBat());
+        setRightBat(lastGame.getRightBat());
+        setPingPongTable(lastGame.getPingPongTable());
+        setScoreBoard(lastGame.getScoreBoard());
+        System.out.println("You resumed your last game");
+        displayScore();
+    }
+
+    @Override
+    public void skipMove() {
+        moveBall();
+        changeBallDirection();
+        moveNPCBat();
+        if (someoneScored()) {
+            updateScore();
+            displayScore();
+            resetBallPositions();
+            resetLeftBatPosition();
+            resetRightBatPosition();
         }
     }
 
@@ -120,9 +226,23 @@ public class PingPongRulesImpl implements PingPongRules {
     public boolean someoneScored() {
         return pointScored(leftBat) || pointScored(rightBat);
     }
+
     @Override
     public void displayScore() {
         System.out.println("Ball is out: Score is " + "Left bat " + scoreBoard.getLeftBatScore() + " : " + "Right Bat " + scoreBoard.getRightBatScore());
+    }
+
+    @Override
+    public void moveNPCBat() {
+        if (ball.getX() > rightBat.getX2()) {
+            rightBat.setX1(rightBat.getX1() + MOVING_UP);
+            rightBat.setX2(rightBat.getX2() + MOVING_UP);
+            rightBat.setX3(rightBat.getX3() + MOVING_UP);
+        } else if (ball.getX() < rightBat.getX2()) {
+            rightBat.setX1(rightBat.getX1() + MOVING_DOWN);
+            rightBat.setX2(rightBat.getX2() + MOVING_DOWN);
+            rightBat.setX3(rightBat.getX3() + MOVING_DOWN);
+        }
     }
 
     private void tryMoveBall(int moveY) {
@@ -131,6 +251,7 @@ public class PingPongRulesImpl implements PingPongRules {
             ball.setY(ball.getY() + moveY);
         } else if(pingPongTable.isBallBouncedToWall(ball.getX() + whichDirectionBallGoes(ball.getVerticalDirection()), ball.getY() + moveY)) {
             if (ball.getVerticalDirection() == 3) {
+                ball.setVerticalDirection(1);
                 ball.setX(ball.getX() + whichDirectionBallGoes(ball.getVerticalDirection()));
                 ball.setY(ball.getY() + moveY);
             } else if (ball.getVerticalDirection() == 1) {

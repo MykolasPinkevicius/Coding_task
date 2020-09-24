@@ -1,6 +1,8 @@
 package command;
 
+import java.io.IOException;
+
 @FunctionalInterface
 public interface UserInputOperation {
-        void execute();
+        void execute() throws IOException, ClassNotFoundException;
 }

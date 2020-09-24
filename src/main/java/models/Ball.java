@@ -1,8 +1,11 @@
-package Items;
+package models;
 
-public class Ball {
+import render.Drawable;
+
+import java.io.Serializable;
+
+public class Ball implements Serializable, Drawable {
     public static final int STRAIGHT_DIRECTION = 2;
-    public static char BALL_ICON = 'B';
     private int x;
     private int y;
     private int direction;
@@ -45,5 +48,30 @@ public class Ball {
 
     public void setY(int y) {
         this.y = y;
+    }
+
+    @Override
+    public int getStartingDrawingPointX() {
+        return getX();
+    }
+
+    @Override
+    public int getStartingDrawingPointY() {
+        return getY();
+    }
+
+    @Override
+    public int getFinishingDrawingPointX() {
+        return getX();
+    }
+
+    @Override
+    public int getFinishingDrawingPointY() {
+        return getY();
+    }
+
+    @Override
+    public char getIcon() {
+        return '\u25CF';
     }
 }

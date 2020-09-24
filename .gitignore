@@ -1,6 +1,9 @@
 # Compiled class file
 *.class
 
+# Saved game file
+*.ser
+
 # Log file
 *.log
 
@@ -14,6 +17,7 @@
 .mtj.tmp/
 
 # Package Files #
+*.ser
 *.jar
 *.war
 *.nar
