@@ -11,6 +11,8 @@ import java.io.Serializable;
 public class MykolasPingPongRules implements PingPongRules, Serializable {
     private static final int MOVING_UP = 1;
     private static final int MOVING_DOWN = -1;
+    public static final char BAT_UP = 'w';
+    public static final char BAT_DOWN = 's';
 
     private Ball ball;
 
@@ -93,10 +95,10 @@ public class MykolasPingPongRules implements PingPongRules, Serializable {
     public void changeBallDirection() {
         if (isBallKnockedByBat(ball, leftBat)) {
             changeBallVerticalDirection();
-            tryChangeBallDirection();
+            changeBallHorizontalDirection();
         } else if (isBallKnockedByBat(ball, rightBat)) {
-            tryChangeBallDirection();
             changeBallVerticalDirection();
+            changeBallHorizontalDirection();
         }
     }
 
@@ -104,7 +106,7 @@ public class MykolasPingPongRules implements PingPongRules, Serializable {
         ball.setVerticalDirection(Utilities.getRandomNumberForVerticalDirection());
     }
 
-    private void tryChangeBallDirection() {
+    private void changeBallHorizontalDirection() {
         if (ball.getDirection() == 1) {
             ball.setDirection(2);
         } else if (ball.getDirection() == 2) {
@@ -147,7 +149,7 @@ public class MykolasPingPongRules implements PingPongRules, Serializable {
     @Override
     public void moveBatUp() {
         moveBall();
-        moveBat('w');
+        moveBat(BAT_UP);
         changeBallDirection();
         moveNPCBat();
         if (someoneScored()) {
@@ -162,7 +164,7 @@ public class MykolasPingPongRules implements PingPongRules, Serializable {
     @Override
     public void moveBatDown() {
         moveBall();
-        moveBat('s');
+        moveBat(BAT_DOWN);
         changeBallDirection();
         moveNPCBat();
         if (someoneScored()) {
