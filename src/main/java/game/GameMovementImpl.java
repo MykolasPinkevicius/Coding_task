@@ -47,19 +47,21 @@ public class GameMovementImpl implements GameMovement {
 
     private void tryMoveBall(int moveY) {
         if (!pingPongTable.isBallBouncedToWall(ball.getX() + whichDirectionBallGoes(ball.getVerticalDirection()), ball.getY() + moveY )) {
-            ball.setX(ball.getX() + whichDirectionBallGoes(ball.getVerticalDirection()));
-            ball.setY(ball.getY() + moveY);
+            moveBallItsDirection(moveY);
         } else if(pingPongTable.isBallBouncedToWall(ball.getX() + whichDirectionBallGoes(ball.getVerticalDirection()), ball.getY() + moveY)) {
             if (ball.getVerticalDirection() == 3) {
                 ball.setVerticalDirection(1);
-                ball.setX(ball.getX() + whichDirectionBallGoes(ball.getVerticalDirection()));
-                ball.setY(ball.getY() + moveY);
+                moveBallItsDirection(moveY);
             } else if (ball.getVerticalDirection() == 1) {
                 ball.setVerticalDirection(3);
-                ball.setX(ball.getX() + whichDirectionBallGoes(ball.getVerticalDirection()));
-                ball.setY(ball.getY() + moveY);
+                moveBallItsDirection(moveY);
             }
         }
+    }
+
+    private void moveBallItsDirection(int moveY) {
+        ball.setX(ball.getX() + whichDirectionBallGoes(ball.getVerticalDirection()));
+        ball.setY(ball.getY() + moveY);
     }
 
     private int whichDirectionBallGoes(int verticalDirection) {
