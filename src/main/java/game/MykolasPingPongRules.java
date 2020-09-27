@@ -4,7 +4,6 @@ import models.Ball;
 import models.Bat;
 import models.PingPongTable;
 import models.ScoreBoard;
-import util.Utilities;
 
 import java.io.Serializable;
 
@@ -74,22 +73,19 @@ public class MykolasPingPongRules implements PingPongRules, Serializable {
         return "Something not right";
     }
 
-    @Override
-    public void resetBallPositions() {
+    private void resetBallPositions() {
         ball.setY(8);
         ball.setX(5);
     }
 
-    @Override
-    public void resetLeftBatPosition() {
+    private void resetLeftBatPosition() {
         leftBat.setY(1);
         leftBat.setX1(4);
         leftBat.setX2(5);
         leftBat.setX3(6);
     }
 
-    @Override
-    public void resetRightBatPosition() {
+    private void resetRightBatPosition() {
         rightBat.setY(13);
         rightBat.setX1(4);
         rightBat.setX2(5);

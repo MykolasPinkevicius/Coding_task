@@ -7,9 +7,6 @@ import models.ScoreBoard;
 
 public interface PingPongRules {
     boolean pointScored(Bat bat);
-    void resetBallPositions();
-    void resetLeftBatPosition();
-    void resetRightBatPosition();
     void updateScore();
     void moveBatUp();
     void moveBatDown();
