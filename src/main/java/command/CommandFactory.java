@@ -4,7 +4,7 @@ import game.PingPongRules;
 
 public class CommandFactory {
     public UserInputOperation getCommand(char userInput, PingPongRules pingPongRules) {
-        switch(userInput) {
+        switch (userInput) {
             case 'w':
                 return new MoveBatUpOperation(pingPongRules);
             case 's':
@@ -17,7 +17,8 @@ public class CommandFactory {
                 return new ResumeGameOperation(pingPongRules);
             case 'f':
                 return new SkipMoveOperation(pingPongRules);
+            default:
+                throw new IllegalStateException("Unexpected value: " + userInput + " you should choose from defined commands");
         }
-        return new DefaultCommandOperation();
     }
 }
