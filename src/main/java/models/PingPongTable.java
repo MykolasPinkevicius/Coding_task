@@ -3,7 +3,7 @@ package models;
 import java.io.Serializable;
 
 public class PingPongTable implements Serializable {
-    private static int[][] tableSize = {
+    private static final int[][] tableSize = {
             {2,1,1,1,1,1,1,1,1,1,1,1,1,1,2},
             {2,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
             {2,0,0,0,0,0,0,0,0,0,0,0,0,0,2},

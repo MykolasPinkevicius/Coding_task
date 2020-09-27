@@ -1,5 +1,6 @@
 package builder;
 
+import game.GameMovementImpl;
 import game.MykolasPingPongRules;
 import models.Ball;
 import models.Bat;
