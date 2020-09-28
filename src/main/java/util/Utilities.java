@@ -5,6 +5,8 @@ import java.util.Random;
 
 public class Utilities {
 
+    private Utilities(){}
+
     private static final int DIRECTION_RIGHT = 2;
     private static final int DIRECTION_LEFT = 1;
     private static final int VERTICAL_DIRECTION_UP = 4;
