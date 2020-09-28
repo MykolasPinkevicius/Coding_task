@@ -1,9 +1,7 @@
 package game;
 
-import models.Ball;
 import models.Bat;
-import models.PingPongTable;
-import models.ScoreBoard;
+
 
 public interface PingPongRules {
     boolean pointScored(Bat bat);

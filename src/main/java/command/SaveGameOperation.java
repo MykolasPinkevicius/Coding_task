@@ -1,26 +1,29 @@
 package command;
 
-import game.PingPongRules;
+import game.MykolasPingPongRules;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.util.logging.Logger;
 
 public class SaveGameOperation implements UserInputOperation {
     public static final String SAVED_GAME_FILE = "game.ser";
-    private PingPongRules pingPongRules;
+    private static final Logger logger = Logger.getLogger(SaveGameOperation.class.getName());
+    private MykolasPingPongRules mykolasPingPongRules;
 
-    public SaveGameOperation(PingPongRules pingPongRules) {
-        this.pingPongRules = pingPongRules;
+    public SaveGameOperation(MykolasPingPongRules mykolasPingPongRules) {
+        this.mykolasPingPongRules = mykolasPingPongRules;
     }
 
     @Override
-    public void execute() throws IOException {
-        FileOutputStream fileOut = new FileOutputStream(SAVED_GAME_FILE);
-        ObjectOutputStream out = new ObjectOutputStream(fileOut);
-        out.writeObject(pingPongRules);
-        out.close();
-        fileOut.close();
-        System.out.println("Game saved in game.ser file");
+    public void execute(){
+        try (FileOutputStream fileOut = new FileOutputStream(SAVED_GAME_FILE);
+        ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
+            out.writeObject(mykolasPingPongRules);
+            logger.info("Game saved in game.ser file");
+        } catch (IOException e) {
+            logger.info(e.getMessage());
+        }
     }
 }

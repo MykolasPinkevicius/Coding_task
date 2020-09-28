@@ -1,17 +1,17 @@
 package command;
 
-import game.PingPongRules;
+import game.MykolasPingPongRules;
 
 
 public class MoveBatDownOperation implements UserInputOperation {
-    private PingPongRules pingPongRules;
+    private MykolasPingPongRules mykolasPingPongRules;
 
-    public MoveBatDownOperation(PingPongRules pingPongRules) {
-        this.pingPongRules = pingPongRules;
+    public MoveBatDownOperation(MykolasPingPongRules mykolasPingPongRules) {
+        this.mykolasPingPongRules = mykolasPingPongRules;
     }
 
     @Override
     public void execute() {
-        pingPongRules.moveBatDown();
+        mykolasPingPongRules.moveBatDown();
     }
 }

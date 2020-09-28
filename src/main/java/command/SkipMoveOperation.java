@@ -1,16 +1,16 @@
 package command;
 
-import game.PingPongRules;
+import game.MykolasPingPongRules;
 
 public class SkipMoveOperation implements UserInputOperation {
-    private PingPongRules pingPongRules;
+    private MykolasPingPongRules mykolasPingPongRules;
 
-    public SkipMoveOperation(PingPongRules pingPongRules) {
-        this.pingPongRules = pingPongRules;
+    public SkipMoveOperation(MykolasPingPongRules mykolasPingPongRules) {
+        this.mykolasPingPongRules = mykolasPingPongRules;
     }
 
     @Override
     public void execute() {
-        pingPongRules.skipMove();
+        mykolasPingPongRules.skipMove();
     }
 }

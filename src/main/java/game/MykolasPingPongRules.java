@@ -6,8 +6,10 @@ import models.PingPongTable;
 import models.ScoreBoard;
 
 import java.io.Serializable;
+import java.util.logging.Logger;
 
 public class MykolasPingPongRules implements PingPongRules, Serializable {
+    private static final Logger logger = Logger.getLogger(MykolasPingPongRules.class.getName());
     public static final char BAT_UP = 'w';
     public static final char BAT_DOWN = 's';
 
@@ -16,7 +18,7 @@ public class MykolasPingPongRules implements PingPongRules, Serializable {
     private Bat rightBat;
     private ScoreBoard scoreBoard;
     private PingPongTable pingPongTable;
-    private GameMovementImpl gameMovement;
+    private transient GameMovementImpl gameMovement;
 
     public MykolasPingPongRules(Ball ball, Bat leftBat, Bat rightBat, ScoreBoard scoreBoard, PingPongTable pingPongTable) {
         this.ball = ball;
@@ -139,7 +141,7 @@ public class MykolasPingPongRules implements PingPongRules, Serializable {
         setRightBat(lastGame.getRightBat());
         setPingPongTable(lastGame.getPingPongTable());
         setScoreBoard(lastGame.getScoreBoard());
-        System.out.println("You resumed your last game");
+        logger.info("You resumed your last game");
         displayScore();
     }
 
@@ -163,6 +165,6 @@ public class MykolasPingPongRules implements PingPongRules, Serializable {
 
     @Override
     public void displayScore() {
-        System.out.println("Ball is out: Score is " + "Left bat " + scoreBoard.getLeftBatScore() + " : " + "Right Bat " + scoreBoard.getRightBatScore());
+        logger.info("Ball is out: Score is " + "Left bat " + scoreBoard.getLeftBatScore() + " : " + "Right Bat " + scoreBoard.getRightBatScore());
     }
 }
