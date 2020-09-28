@@ -42,6 +42,8 @@ public class GameMovementImpl implements GameMovement {
             case 2:
                 tryMoveBall(1);
                 break;
+            default:
+                throw new IllegalStateException("Bad ball movement " + ball.getDirection());
         }
     }
 
@@ -86,34 +88,34 @@ public class GameMovementImpl implements GameMovement {
             case 'w' :
                 tryMoveBat(-1, leftBat);
                 break;
+            default :
+                throw new IllegalStateException("Bad bat movement ");
         }
     }
 
     private void tryMoveBat(int moveX, Bat bat) {
-        if (moveX == MOVING_UP) {
-            if (!pingPongTable.isBatBumpToWall(bat.getX3()+moveX,bat.getY())) {
+        if (moveX == MOVING_UP && !pingPongTable.isBatBumpToWall(bat.getX3()+moveX,bat.getY())) {
                 bat.setX1(bat.getX1()+moveX);
                 bat.setX2(bat.getX2()+moveX);
                 bat.setX3(bat.getX3()+moveX);
-            }
-        } else if (moveX == MOVING_DOWN) {
-            if (!pingPongTable.isBatBumpToWall(bat.getX1()+moveX,bat.getY())) {
+        }
+        if (moveX == MOVING_DOWN && !pingPongTable.isBatBumpToWall(bat.getX1()+moveX,bat.getY())) {
                 bat.setX1(bat.getX1()+moveX);
                 bat.setX2(bat.getX2()+moveX);
                 bat.setX3(bat.getX3()+moveX);
-            }
         }
     }
 
     @Override
     public void changeBallDirection() {
-        if (isBallKnockedByBat(ball, leftBat)) {
-            changeBallVerticalDirection();
-            changeBallHorizontalDirection();
-        } else if (isBallKnockedByBat(ball, rightBat)) {
-            changeBallVerticalDirection();
-            changeBallHorizontalDirection();
+        if (isBallKnockedByBat(ball, leftBat) || (isBallKnockedByBat(ball, rightBat))) {
+            changeBallVerticalAndHorizontalPosition();
         }
+    }
+
+    public void changeBallVerticalAndHorizontalPosition() {
+        changeBallVerticalDirection();
+        changeBallHorizontalDirection();
     }
 
     private void changeBallVerticalDirection() {
