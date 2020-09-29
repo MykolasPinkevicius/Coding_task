@@ -110,13 +110,7 @@ public class MykolasPingPongRules implements PingPongRules, Serializable {
         gameMovement.moveBat(BAT_UP);
         gameMovement.changeBallDirection();
         gameMovement.moveNPCBat();
-        if (someoneScored()) {
-            updateScore();
-            displayScore();
-            resetBallPositions();
-            resetLeftBatPosition();
-            resetRightBatPosition();
-        }
+        ifSomeoneScoredUpdateIt();
     }
 
     @Override
@@ -125,13 +119,7 @@ public class MykolasPingPongRules implements PingPongRules, Serializable {
         gameMovement.moveBat(BAT_DOWN);
         gameMovement.changeBallDirection();
         gameMovement.moveNPCBat();
-        if (someoneScored()) {
-            updateScore();
-            displayScore();
-            resetBallPositions();
-            resetLeftBatPosition();
-            resetRightBatPosition();
-        }
+        ifSomeoneScoredUpdateIt();
     }
 
     @Override
@@ -150,6 +138,10 @@ public class MykolasPingPongRules implements PingPongRules, Serializable {
         gameMovement.moveBall();
         gameMovement.changeBallDirection();
         gameMovement.moveNPCBat();
+        ifSomeoneScoredUpdateIt();
+    }
+
+    public void ifSomeoneScoredUpdateIt() {
         if (someoneScored()) {
             updateScore();
             displayScore();
@@ -158,6 +150,7 @@ public class MykolasPingPongRules implements PingPongRules, Serializable {
             resetRightBatPosition();
         }
     }
+
     @Override
     public boolean someoneScored() {
         return pointScored(leftBat) || pointScored(rightBat);
