@@ -75,23 +75,14 @@ public class MykolasPingPongRules implements PingPongRules, Serializable {
         return "Something not right";
     }
 
-    private void resetBallPositions() {
-        ball.setY(8);
-        ball.setX(5);
+    @Override
+    public boolean someoneScored() {
+        return pointScored(leftBat) || pointScored(rightBat);
     }
 
-    private void resetLeftBatPosition() {
-        leftBat.setY(1);
-        leftBat.setX1(4);
-        leftBat.setX2(5);
-        leftBat.setX3(6);
-    }
-
-    private void resetRightBatPosition() {
-        rightBat.setY(13);
-        rightBat.setX1(4);
-        rightBat.setX2(5);
-        rightBat.setX3(6);
+    @Override
+    public void displayScore() {
+        logger.info("Ball is out: Score is " + "Left bat " + scoreBoard.getLeftBatScore() + " : " + "Right Bat " + scoreBoard.getRightBatScore());
     }
 
     @Override
@@ -111,7 +102,7 @@ public class MykolasPingPongRules implements PingPongRules, Serializable {
         ifSomeoneScoredUpdateIt();
     }
 
-    public void activateBallWithNpcMovement() {
+    private void activateBallWithNpcMovement() {
         gameMovement.moveBall();
         gameMovement.changeBallDirection();
         gameMovement.moveNPCBat();
@@ -145,19 +136,32 @@ public class MykolasPingPongRules implements PingPongRules, Serializable {
         if (someoneScored()) {
             updateScore();
             displayScore();
-            resetBallPositions();
-            resetLeftBatPosition();
-            resetRightBatPosition();
+            resetGameItemPositions();
         }
     }
 
-    @Override
-    public boolean someoneScored() {
-        return pointScored(leftBat) || pointScored(rightBat);
+    private void resetGameItemPositions() {
+        resetBallPositions();
+        resetLeftBatPosition();
+        resetRightBatPosition();
     }
 
-    @Override
-    public void displayScore() {
-        logger.info("Ball is out: Score is " + "Left bat " + scoreBoard.getLeftBatScore() + " : " + "Right Bat " + scoreBoard.getRightBatScore());
+    private void resetBallPositions() {
+        ball.setY(8);
+        ball.setX(5);
+    }
+
+    private void resetLeftBatPosition() {
+        leftBat.setY(1);
+        leftBat.setX1(4);
+        leftBat.setX2(5);
+        leftBat.setX3(6);
+    }
+
+    private void resetRightBatPosition() {
+        rightBat.setY(13);
+        rightBat.setX1(4);
+        rightBat.setX2(5);
+        rightBat.setX3(6);
     }
 }
