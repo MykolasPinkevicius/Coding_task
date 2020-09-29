@@ -17,7 +17,6 @@
 .mtj.tmp/
 
 # Package Files #
-*.ser
 *.jar
 *.war
 *.nar
