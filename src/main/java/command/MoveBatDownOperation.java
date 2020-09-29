@@ -12,6 +12,6 @@ public class MoveBatDownOperation implements UserInputOperation {
 
     @Override
     public void execute() {
-        mykolasPingPongRules.moveBatDown();
+        mykolasPingPongRules.activateMoveBatDown();
     }
 }

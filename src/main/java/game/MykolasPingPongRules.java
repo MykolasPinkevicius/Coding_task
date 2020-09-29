@@ -105,20 +105,22 @@ public class MykolasPingPongRules implements PingPongRules, Serializable {
     }
 
     @Override
-    public void moveBatUp() {
-        gameMovement.moveBall();
+    public void activateMoveBatUp() {
         gameMovement.moveBat(BAT_UP);
-        gameMovement.changeBallDirection();
-        gameMovement.moveNPCBat();
+        activateBallWithNpcMovement();
         ifSomeoneScoredUpdateIt();
     }
 
-    @Override
-    public void moveBatDown() {
+    public void activateBallWithNpcMovement() {
         gameMovement.moveBall();
-        gameMovement.moveBat(BAT_DOWN);
         gameMovement.changeBallDirection();
         gameMovement.moveNPCBat();
+    }
+
+    @Override
+    public void activateMoveBatDown() {
+        gameMovement.moveBat(BAT_DOWN);
+        activateBallWithNpcMovement();
         ifSomeoneScoredUpdateIt();
     }
 
@@ -135,13 +137,11 @@ public class MykolasPingPongRules implements PingPongRules, Serializable {
 
     @Override
     public void skipMove() {
-        gameMovement.moveBall();
-        gameMovement.changeBallDirection();
-        gameMovement.moveNPCBat();
+        activateBallWithNpcMovement();
         ifSomeoneScoredUpdateIt();
     }
 
-    public void ifSomeoneScoredUpdateIt() {
+    private void ifSomeoneScoredUpdateIt() {
         if (someoneScored()) {
             updateScore();
             displayScore();
