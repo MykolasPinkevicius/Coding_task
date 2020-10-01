@@ -28,14 +28,14 @@ public class StartGame {
         startGame(QUIT, mykolasPingPongRules, commandFactory, renderer);
     }
 
-    private static void startGame(char QUIT, MykolasPingPongRules mykolasPingPongRules, CommandFactory commandFactory, Renderer renderer) throws IOException, ClassNotFoundException {
+    private static void startGame(char quit, MykolasPingPongRules mykolasPingPongRules, CommandFactory commandFactory, Renderer renderer) throws IOException, ClassNotFoundException {
         Scanner scanner = new Scanner(System.in);
         drawGame(mykolasPingPongRules, renderer);
         logger.info("Input 'w' to make bat go up, 's' to go down, 'f' to skip move, \n't' to save the game, 'r' to resume the last saved game, 'q' to quit game");
         char userInput = scanner.next().charAt(0);
         commandFactory.getCommand(userInput, mykolasPingPongRules).execute();
 
-        while (userInput != QUIT) {
+        while (userInput != quit) {
             userInput = continueGame(commandFactory, renderer, scanner, mykolasPingPongRules);
         }
         scanner.close();
