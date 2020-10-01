@@ -17,29 +17,50 @@ import java.util.logging.Logger;
 public class StartGame {
     private static final Logger logger = Logger.getLogger(StartGame.class.getName());
     public static void main(String[] args) throws IOException, ClassNotFoundException {
+        startGame();
+    }
+
+    public static void startGame() throws IOException, ClassNotFoundException {
         final char QUIT = 'q';
+        MykolasPingPongRules mykolasPingPongRules = initialiseRules();
         CommandFactory commandFactory = new CommandFactory();
         Renderer renderer = new Renderer();
+        startGame(QUIT, mykolasPingPongRules, commandFactory, renderer);
+    }
+
+    private static void startGame(char QUIT, MykolasPingPongRules mykolasPingPongRules, CommandFactory commandFactory, Renderer renderer) throws IOException, ClassNotFoundException {
         Scanner scanner = new Scanner(System.in);
-        MykolasPingPongRules mykolasPingPongRules = new MykolasPingPongRulesBuilder()
+        drawGame(mykolasPingPongRules, renderer);
+        logger.info("Input 'w' to make bat go up, 's' to go down, 'f' to skip move, \n't' to save the game, 'r' to resume the last saved game, 'q' to quit game");
+        char userInput = scanner.next().charAt(0);
+        commandFactory.getCommand(userInput, mykolasPingPongRules).execute();
+
+        while (userInput != QUIT) {
+            userInput = continueGame(commandFactory, renderer, scanner, mykolasPingPongRules);
+        }
+        scanner.close();
+    }
+
+    private static void drawGame(MykolasPingPongRules mykolasPingPongRules, Renderer renderer) {
+        renderer.drawMap(List.of(mykolasPingPongRules.getLeftBat(), mykolasPingPongRules.getRightBat(), mykolasPingPongRules.getBall()));
+    }
+
+    private static char continueGame(CommandFactory commandFactory, Renderer renderer, Scanner scanner, MykolasPingPongRules mykolasPingPongRules) throws IOException, ClassNotFoundException {
+        char userInput;
+        drawGame(mykolasPingPongRules, renderer);
+        logger.info("Input 'w' to make bat go up, 's' to go down, 'f' to skip move, \n't' to save the game, 'r' to resume the last saved game, 'q' to quit game");
+        userInput = scanner.next().charAt(0);
+        commandFactory.getCommand(userInput, mykolasPingPongRules).execute();
+        return userInput;
+    }
+
+    private static MykolasPingPongRules initialiseRules() {
+        return new MykolasPingPongRulesBuilder()
                 .setLeftBat(new Bat(4, 5, 6, 1))
                 .setRightBat(new Bat(4, 5, 6, 13))
                 .setBall(new Ball(5, 7, Utilities.getRandomNumberForDirection(), Utilities.getRandomNumberForVerticalDirection()))
                 .setScoreBoard(new ScoreBoard())
                 .setPingPongTable(new PingPongTable())
                 .build();
-        renderer.drawMap(List.of(mykolasPingPongRules.getLeftBat(), mykolasPingPongRules.getRightBat(), mykolasPingPongRules.getBall()));
-
-        logger.info("Input 'w' to make bat go up, 's' to go down, 'f' to skip move, \n't' to save the game, 'r' to resume the last saved game, 'q' to quit game");
-        char userInput = scanner.next().charAt(0);
-        commandFactory.getCommand(userInput, mykolasPingPongRules).execute();
-
-        while (userInput != QUIT) {
-            renderer.drawMap(List.of(mykolasPingPongRules.getLeftBat(), mykolasPingPongRules.getRightBat(), mykolasPingPongRules.getBall()));
-            logger.info("Input 'w' to make bat go up, 's' to go down, 'f' to skip move, \n't' to save the game, 'r' to resume the last saved game, 'q' to quit game");
-            userInput = scanner.next().charAt(0);
-            commandFactory.getCommand(userInput, mykolasPingPongRules).execute();
-        }
-        scanner.close();
     }
 }
