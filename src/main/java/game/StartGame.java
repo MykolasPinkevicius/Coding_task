@@ -16,26 +16,28 @@ import java.util.logging.Logger;
 
 public class StartGame {
     private static final Logger logger = Logger.getLogger(StartGame.class.getName());
+    private static final char QUIT = 'q';
+
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         startGame();
     }
 
     public static void startGame() throws IOException, ClassNotFoundException {
-        final char QUIT = 'q';
+
         MykolasPingPongRules mykolasPingPongRules = initialiseRules();
         CommandFactory commandFactory = new CommandFactory();
         Renderer renderer = new Renderer();
-        startGame(QUIT, mykolasPingPongRules, commandFactory, renderer);
+        startGame(mykolasPingPongRules, commandFactory, renderer);
     }
 
-    private static void startGame(char quit, MykolasPingPongRules mykolasPingPongRules, CommandFactory commandFactory, Renderer renderer) throws IOException, ClassNotFoundException {
+    private static void startGame(MykolasPingPongRules mykolasPingPongRules, CommandFactory commandFactory, Renderer renderer) throws IOException, ClassNotFoundException {
         Scanner scanner = new Scanner(System.in);
         drawGame(mykolasPingPongRules, renderer);
         logger.info("Input 'w' to make bat go up, 's' to go down, 'f' to skip move, \n't' to save the game, 'r' to resume the last saved game, 'q' to quit game");
         char userInput = scanner.next().charAt(0);
         commandFactory.getCommand(userInput, mykolasPingPongRules).execute();
 
-        while (userInput != quit) {
+        while (userInput != QUIT) {
             userInput = continueGame(commandFactory, renderer, scanner, mykolasPingPongRules);
         }
         scanner.close();
