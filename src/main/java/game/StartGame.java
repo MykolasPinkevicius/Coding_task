@@ -35,16 +35,20 @@ public class StartGame {
         drawGame(mykolasPingPongRules, renderer);
         logger.info("Input 'w' to make bat go up, 's' to go down, 'f' to skip move, \n't' to save the game, 'r' to resume the last saved game, 'q' to quit game");
         char userInput = scanner.next().charAt(0);
-        try {
-            commandFactory.getCommand(userInput, mykolasPingPongRules).execute();
-        } catch (IllegalStateException e) {
-            logger.info("we catched the wrong input \n you should choose from defined commands");
-        }
+        executeCommand(mykolasPingPongRules, commandFactory, userInput);
 
         while (userInput != QUIT) {
             userInput = continueGame(commandFactory, renderer, scanner, mykolasPingPongRules);
         }
         scanner.close();
+    }
+
+    private static void executeCommand(MykolasPingPongRules mykolasPingPongRules, CommandFactory commandFactory, char userInput) throws IOException, ClassNotFoundException {
+        try {
+            commandFactory.getCommand(userInput, mykolasPingPongRules).execute();
+        } catch (IllegalStateException e) {
+            logger.info("we catched the wrong input \n you should choose from defined commands");
+        }
     }
 
     private static void drawGame(MykolasPingPongRules mykolasPingPongRules, Renderer renderer) {
@@ -56,11 +60,7 @@ public class StartGame {
         drawGame(mykolasPingPongRules, renderer);
         logger.info("Input 'w' to make bat go up, 's' to go down, 'f' to skip move, \n't' to save the game, 'r' to resume the last saved game, 'q' to quit game");
         userInput = scanner.next().charAt(0);
-        try {
-            commandFactory.getCommand(userInput, mykolasPingPongRules).execute();
-        } catch (IllegalStateException e) {
-            logger.info("we catched the wrong input \n you should choose from defined commands");
-        }
+        executeCommand(mykolasPingPongRules, commandFactory, userInput);
         return userInput;
     }
 
