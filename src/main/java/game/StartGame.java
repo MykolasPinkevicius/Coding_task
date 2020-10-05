@@ -35,7 +35,11 @@ public class StartGame {
         drawGame(mykolasPingPongRules, renderer);
         logger.info("Input 'w' to make bat go up, 's' to go down, 'f' to skip move, \n't' to save the game, 'r' to resume the last saved game, 'q' to quit game");
         char userInput = scanner.next().charAt(0);
-        commandFactory.getCommand(userInput, mykolasPingPongRules).execute();
+        try {
+            commandFactory.getCommand(userInput, mykolasPingPongRules).execute();
+        } catch (IllegalStateException e) {
+            logger.info("we catched the wrong input \n you should choose from defined commands");
+        }
 
         while (userInput != QUIT) {
             userInput = continueGame(commandFactory, renderer, scanner, mykolasPingPongRules);
@@ -52,7 +56,11 @@ public class StartGame {
         drawGame(mykolasPingPongRules, renderer);
         logger.info("Input 'w' to make bat go up, 's' to go down, 'f' to skip move, \n't' to save the game, 'r' to resume the last saved game, 'q' to quit game");
         userInput = scanner.next().charAt(0);
-        commandFactory.getCommand(userInput, mykolasPingPongRules).execute();
+        try {
+            commandFactory.getCommand(userInput, mykolasPingPongRules).execute();
+        } catch (IllegalStateException e) {
+            logger.info("we catched the wrong input \n you should choose from defined commands");
+        }
         return userInput;
     }
 
