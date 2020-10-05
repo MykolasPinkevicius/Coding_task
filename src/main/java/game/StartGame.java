@@ -51,7 +51,7 @@ public class StartGame {
         try {
             commandFactory.getCommand(userInput, mykolasPingPongRules).execute();
         } catch (IllegalStateException e) {
-            logger.info("we catched the wrong input \n you should choose from defined commands");
+            logger.info("we catched the wrong input \n you should choose from defined commands\n");
         }
     }
 
