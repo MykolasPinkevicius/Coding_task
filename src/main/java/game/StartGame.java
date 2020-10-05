@@ -19,10 +19,10 @@ public class StartGame {
     private static final char QUIT = 'q';
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
-        startGame();
+        initGame();
     }
 
-    public static void startGame() throws IOException, ClassNotFoundException {
+    public static void initGame() throws IOException, ClassNotFoundException {
 
         MykolasPingPongRules mykolasPingPongRules = initialiseRules();
         CommandFactory commandFactory = new CommandFactory();
@@ -33,14 +33,18 @@ public class StartGame {
     private static void startGame(MykolasPingPongRules mykolasPingPongRules, CommandFactory commandFactory, Renderer renderer) throws IOException, ClassNotFoundException {
         Scanner scanner = new Scanner(System.in);
         drawGame(mykolasPingPongRules, renderer);
-        logger.info("Input 'w' to make bat go up, 's' to go down, 'f' to skip move, \n't' to save the game, 'r' to resume the last saved game, 'q' to quit game");
-        char userInput = scanner.next().charAt(0);
+        char userInput = getInput(scanner);
         executeCommand(mykolasPingPongRules, commandFactory, userInput);
 
         while (userInput != QUIT) {
             userInput = continueGame(commandFactory, renderer, scanner, mykolasPingPongRules);
         }
         scanner.close();
+    }
+
+    private static char getInput(Scanner scanner) {
+        logger.info("Input 'w' to make bat go up, 's' to go down, 'f' to skip move, \n't' to save the game, 'r' to resume the last saved game, 'q' to quit game");
+        return scanner.next().charAt(0);
     }
 
     private static void executeCommand(MykolasPingPongRules mykolasPingPongRules, CommandFactory commandFactory, char userInput) throws IOException, ClassNotFoundException {
@@ -56,10 +60,8 @@ public class StartGame {
     }
 
     private static char continueGame(CommandFactory commandFactory, Renderer renderer, Scanner scanner, MykolasPingPongRules mykolasPingPongRules) throws IOException, ClassNotFoundException {
-        char userInput;
         drawGame(mykolasPingPongRules, renderer);
-        logger.info("Input 'w' to make bat go up, 's' to go down, 'f' to skip move, \n't' to save the game, 'r' to resume the last saved game, 'q' to quit game");
-        userInput = scanner.next().charAt(0);
+        char userInput = getInput(scanner);
         executeCommand(mykolasPingPongRules, commandFactory, userInput);
         return userInput;
     }
