@@ -142,4 +142,9 @@ public class GameMovementImpl implements GameMovement {
         return ball.getX() == bat.getX1() || ball.getX() == bat.getX2() || ball.getX() == bat.getX3();
     }
 
+    void activateBallWithNpcMovement() {
+        moveBall();
+        changeBallDirection();
+        moveNPCBat();
+    }
 }

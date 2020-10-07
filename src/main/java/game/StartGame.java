@@ -9,7 +9,6 @@ import models.ScoreBoard;
 import render.Renderer;
 import util.Utilities;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Logger;
@@ -18,28 +17,26 @@ public class StartGame {
     private static final Logger logger = Logger.getLogger(StartGame.class.getName());
     private static final char QUIT = 'q';
 
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
-        initGame();
+    public static void main(String[] args) {
+        startGame();
     }
 
-    public static void initGame() throws IOException, ClassNotFoundException {
+    public static void startGame() {
 
         MykolasPingPongRules mykolasPingPongRules = initialiseRules();
         CommandFactory commandFactory = new CommandFactory();
         Renderer renderer = new Renderer();
-        startGame(mykolasPingPongRules, commandFactory, renderer);
+        Scanner scanner = new Scanner(System.in);
+        try (scanner) {
+            startGameUntilQuited(mykolasPingPongRules, commandFactory, renderer, scanner);
+        }
     }
 
-    private static void startGame(MykolasPingPongRules mykolasPingPongRules, CommandFactory commandFactory, Renderer renderer) throws IOException, ClassNotFoundException {
-        Scanner scanner = new Scanner(System.in);
-        drawGame(mykolasPingPongRules, renderer);
-        char userInput = getInput(scanner);
-        executeCommand(mykolasPingPongRules, commandFactory, userInput);
-
-        while (userInput != QUIT) {
-            userInput = continueGame(commandFactory, renderer, scanner, mykolasPingPongRules);
+    private static void startGameUntilQuited(MykolasPingPongRules mykolasPingPongRules, CommandFactory commandFactory, Renderer renderer, Scanner scanner) {
+        char firstMoveInput = 'f';
+        while (firstMoveInput != QUIT) {
+            firstMoveInput = continueGame(commandFactory, renderer, scanner, mykolasPingPongRules);
         }
-        scanner.close();
     }
 
     private static char getInput(Scanner scanner) {
@@ -47,7 +44,7 @@ public class StartGame {
         return scanner.next().charAt(0);
     }
 
-    private static void executeCommand(MykolasPingPongRules mykolasPingPongRules, CommandFactory commandFactory, char userInput) throws IOException, ClassNotFoundException {
+    private static void executeCommand(MykolasPingPongRules mykolasPingPongRules, CommandFactory commandFactory, char userInput) {
         try {
             commandFactory.getCommand(userInput, mykolasPingPongRules).execute();
         } catch (IllegalStateException e) {
@@ -59,7 +56,7 @@ public class StartGame {
         renderer.drawMap(List.of(mykolasPingPongRules.getLeftBat(), mykolasPingPongRules.getRightBat(), mykolasPingPongRules.getBall()));
     }
 
-    private static char continueGame(CommandFactory commandFactory, Renderer renderer, Scanner scanner, MykolasPingPongRules mykolasPingPongRules) throws IOException, ClassNotFoundException {
+    private static char continueGame(CommandFactory commandFactory, Renderer renderer, Scanner scanner, MykolasPingPongRules mykolasPingPongRules){
         drawGame(mykolasPingPongRules, renderer);
         char userInput = getInput(scanner);
         executeCommand(mykolasPingPongRules, commandFactory, userInput);
