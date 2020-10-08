@@ -11,6 +11,8 @@ public class Bat implements Serializable, Drawable {
     private int x3;
     private int y;
 
+    public Bat() {}
+
     public Bat(int x1, int x2, int x3, int y) {
         this.x1 = x1;
         this.x2 = x2;
