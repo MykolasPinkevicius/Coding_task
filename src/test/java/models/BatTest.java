@@ -18,18 +18,16 @@ class BatTest {
         bat.setX3(x3Coordinate);
         bat.setY(yCoordinate);
 
-        assertEquals(bat.getX1(), x1Coordinate, "Bat x1 coordinate wasn't set correctly");
-        assertEquals(bat.getX2(), x2Coordinate, "Bat x2 coordinate wasn't set correctly");
-        assertEquals(bat.getX3(), x3Coordinate, "Bat x3 coordinate wasn't set correctly");
-        assertEquals(bat.getY(), yCoordinate, "Bat y coordinate wasn't set correctly");
+        assertEquals(x1Coordinate, bat.getX1(),"Bat x1 coordinate wasn't set correctly");
+        assertEquals(x2Coordinate, bat.getX2(),"Bat x2 coordinate wasn't set correctly");
+        assertEquals(x3Coordinate, bat.getX3(),"Bat x3 coordinate wasn't set correctly");
+        assertEquals(yCoordinate, bat.getY(),"Bat y coordinate wasn't set correctly");
     }
     @Test
     void shouldReturnCorrectIcon() {
-        final char batIcon = '\u25A0';
+        final char BAT_ICON = '\u25A0';
         final Bat bat = new Bat();
-        char result = bat.getIcon();
-        assertEquals(batIcon, result, "Bat returned bad icon");
-    }
+        assertEquals(BAT_ICON, bat.getIcon(),"Bat icon returned not correctly");    }
 
     @Test
     void shouldSetBatStartingFinishingCoordinates() {
@@ -40,9 +38,9 @@ class BatTest {
 
         final Bat bat = new Bat(x1Coordinate, x2Coordinate,x3Coordinate,yCoordinate);
 
-        assertEquals(bat.getStartingDrawingPointX(), x1Coordinate, "Starting x coordinate wasn't set correctly");
-        assertEquals(bat.getFinishingDrawingPointX(), x3Coordinate, "Finishing x coordinate wasn't set correctly");
-        assertEquals(bat.getStartingDrawingPointY(), yCoordinate, "Starting y coordinate wasn't set correctly");
-        assertEquals(bat.getFinishingDrawingPointY(), yCoordinate, "FInishing y coordinate wasn't set correctly");
+        assertEquals(x1Coordinate, bat.getStartingDrawingPointX(),"Starting x coordinate wasn't set correctly");
+        assertEquals(x3Coordinate, bat.getFinishingDrawingPointX(),"Finishing x coordinate wasn't set correctly");
+        assertEquals(yCoordinate, bat.getStartingDrawingPointY(),"Starting y coordinate wasn't set correctly");
+        assertEquals(yCoordinate, bat.getFinishingDrawingPointY(),"FInishing y coordinate wasn't set correctly");
     }
 }

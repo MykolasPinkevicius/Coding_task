@@ -13,7 +13,7 @@ class ScoreBoardTest {
         scoreBoard.setRightBatScore(score);
         scoreBoard.setLeftBatScore(score);
 
-        assertEquals(scoreBoard.getLeftBatScore(), score, "The bat score wasn't set correctly");
-        assertEquals(scoreBoard.getRightBatScore(), score, "The bat score wasn't set correctly");
+        assertEquals(score, scoreBoard.getLeftBatScore(),"The bat score wasn't set correctly");
+        assertEquals(score, scoreBoard.getRightBatScore(),"The bat score wasn't set correctly");
     }
 }

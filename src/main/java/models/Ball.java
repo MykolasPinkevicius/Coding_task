@@ -11,6 +11,8 @@ public class Ball implements Serializable, Drawable {
     private int direction;
     private int verticalDirection;
 
+    public Ball() {}
+
     public Ball(int x, int y, int direction, int verticalDirection) {
         this.x = x;
         this.y = y;
