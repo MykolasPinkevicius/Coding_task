@@ -16,6 +16,7 @@ import java.util.logging.Logger;
 public class StartGame {
     private static final Logger logger = Logger.getLogger(StartGame.class.getName());
     private static final char QUIT = 'q';
+    public static final char FIRST_MOVE = 'f';
 
     public static void main(String[] args) {
         startGame();
@@ -33,9 +34,9 @@ public class StartGame {
     }
 
     private static void startGameUntilQuited(MykolasPingPongRules mykolasPingPongRules, CommandFactory commandFactory, Renderer renderer, Scanner scanner) {
-        char firstMoveInput = 'f';
-        while (firstMoveInput != QUIT) {
-            firstMoveInput = continueGame(commandFactory, renderer, scanner, mykolasPingPongRules);
+        char move = FIRST_MOVE;
+        while (move != QUIT) {
+            move = continueGame(commandFactory, renderer, scanner, mykolasPingPongRules);
         }
     }
 
