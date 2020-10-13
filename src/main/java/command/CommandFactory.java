@@ -6,9 +6,9 @@ public class CommandFactory {
     public UserInputOperation getCommand(char userInput, MykolasPingPongRules mykolasPingPongRules) {
         switch (userInput) {
             case 'w':
-                return new MoveBatUpOperation(mykolasPingPongRules);
+                return new MoveUpOperation(mykolasPingPongRules);
             case 's':
-                return new MoveBatDownOperation(mykolasPingPongRules);
+                return new MoveDownOperation(mykolasPingPongRules);
             case 'q':
                 return new QuitGameOperation();
             case 't':

@@ -15,12 +15,12 @@ class BallTest {
 
         ball.setX(x);
         ball.setY(y);
-        ball.setDirection(1);
+        ball.setHorizontalDirection(1);
         ball.setVerticalDirection(1);
 
         assertEquals(ball.getX(), x, "Ball x coordinate wasn't set correctly");
         assertEquals(ball.getY(), y, "Ball y coordinate wasn't set correctly");
-        assertEquals(ball.getDirection(), direction, "Ball direction wasn't set correctly");
+        assertEquals(ball.getHorizontalDirection(), direction, "Ball direction wasn't set correctly");
         assertEquals(ball.getVerticalDirection(), verticalDirection, "Ball vertical direction wasn't set correctly");
     }
     @Test

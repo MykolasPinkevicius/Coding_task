@@ -1,22 +1,23 @@
 package models;
 
+import game.Movable;
 import render.Drawable;
 
 import java.io.Serializable;
 
-public class Ball implements Serializable, Drawable {
+public class Ball implements Serializable, Drawable, Movable {
     public static final char BALL_ICON = '\u25CF';
     private int x;
     private int y;
-    private int direction;
+    private int horizontalDirection;
     private int verticalDirection;
 
     public Ball() {}
 
-    public Ball(int x, int y, int direction, int verticalDirection) {
+    public Ball(int x, int y, int horizontalDirection, int verticalDirection) {
         this.x = x;
         this.y = y;
-        this.direction = direction;
+        this.horizontalDirection = horizontalDirection;
         this.verticalDirection = verticalDirection;
     }
 
@@ -28,12 +29,12 @@ public class Ball implements Serializable, Drawable {
         this.verticalDirection = verticalDirection;
     }
 
-    public int getDirection() {
-        return direction;
+    public int getHorizontalDirection() {
+        return horizontalDirection;
     }
 
-    public void setDirection(int direction) {
-        this.direction = direction;
+    public void setHorizontalDirection(int horizontalDirection) {
+        this.horizontalDirection = horizontalDirection;
     }
 
     public int getX() {
@@ -75,5 +76,15 @@ public class Ball implements Serializable, Drawable {
     @Override
     public char getIcon() {
         return BALL_ICON;
+    }
+
+    @Override
+    public int getNextPotentialVerticalXPoint() {
+        return 0;
+    }
+
+    @Override
+    public int getNextPotentialHorizontalYPoint() {
+        return 0;
     }
 }

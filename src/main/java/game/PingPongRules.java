@@ -6,8 +6,8 @@ import models.Bat;
 public interface PingPongRules {
     boolean pointScored(Bat bat);
     void updateScore();
-    void activateMoveBatUp();
-    void activateMoveBatDown();
+    void activateMoveUp();
+    void activateMoveDown();
     void returnLastGameData(MykolasPingPongRules pingPongRules);
     void skipMove();
     boolean someoneScored();

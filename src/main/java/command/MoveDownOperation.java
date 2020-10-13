@@ -3,15 +3,15 @@ package command;
 import game.MykolasPingPongRules;
 
 
-public class MoveBatUpOperation implements UserInputOperation {
+public class MoveDownOperation implements UserInputOperation {
     private MykolasPingPongRules mykolasPingPongRules;
 
-    public MoveBatUpOperation(MykolasPingPongRules mykolasPingPongRules) {
+    public MoveDownOperation(MykolasPingPongRules mykolasPingPongRules) {
         this.mykolasPingPongRules = mykolasPingPongRules;
     }
 
     @Override
     public void execute() {
-        mykolasPingPongRules.activateMoveBatUp();
+        mykolasPingPongRules.activateMoveDown();
     }
 }

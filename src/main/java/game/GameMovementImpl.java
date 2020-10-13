@@ -35,7 +35,7 @@ public class GameMovementImpl implements GameMovement {
 
     @Override
     public void moveBall() {
-        switch(ball.getDirection()){
+        switch(ball.getHorizontalDirection()){
             case 1:
                 tryMoveBall(-1);
                 break;
@@ -43,7 +43,7 @@ public class GameMovementImpl implements GameMovement {
                 tryMoveBall(1);
                 break;
             default:
-                throw new IllegalStateException("Bad ball movement " + ball.getDirection());
+                throw new IllegalStateException("Bad ball movement " + ball.getHorizontalDirection());
         }
     }
 
@@ -123,10 +123,10 @@ public class GameMovementImpl implements GameMovement {
     }
 
     private void changeBallHorizontalDirection() {
-        if (ball.getDirection() == 1) {
-            ball.setDirection(2);
-        } else if (ball.getDirection() == 2) {
-            ball.setDirection(1);
+        if (ball.getHorizontalDirection() == 1) {
+            ball.setHorizontalDirection(2);
+        } else if (ball.getHorizontalDirection() == 2) {
+            ball.setHorizontalDirection(1);
         }
     }
 

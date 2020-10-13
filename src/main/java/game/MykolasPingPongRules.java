@@ -12,6 +12,8 @@ public class MykolasPingPongRules implements PingPongRules, Serializable {
     private static final Logger logger = Logger.getLogger(MykolasPingPongRules.class.getName());
     public static final char BAT_UP = 'w';
     public static final char BAT_DOWN = 's';
+    public static final int BALL_PASSED_THE_LEFT_BAT = 0;
+    public static final int BALL_PASSED_THE_RIGHT_BAT = 15;
 
     private Ball ball;
     private Bat leftBat;
@@ -67,9 +69,9 @@ public class MykolasPingPongRules implements PingPongRules, Serializable {
     }
 
     private String whichPlayerScored() {
-        if (ball.getY() == 0 && !gameMovement.isBallKnockedByBat(ball, leftBat)) {
+        if (ball.getY() == BALL_PASSED_THE_LEFT_BAT && !gameMovement.isBallKnockedByBat(ball, leftBat)) {
             return "RightBat";
-        } else if (ball.getY() == 15 && !gameMovement.isBallKnockedByBat(ball, rightBat)){
+        } else if (ball.getY() == BALL_PASSED_THE_RIGHT_BAT && !gameMovement.isBallKnockedByBat(ball, rightBat)){
             return "LeftBat";
         }
         return "Something not right";
@@ -96,14 +98,14 @@ public class MykolasPingPongRules implements PingPongRules, Serializable {
     }
 
     @Override
-    public void activateMoveBatUp() {
+    public void activateMoveUp() {
         gameMovement.moveBat(BAT_UP);
         gameMovement.activateBallWithNpcMovement();
         ifSomeoneScoredUpdateIt();
     }
 
     @Override
-    public void activateMoveBatDown() {
+    public void activateMoveDown() {
         gameMovement.moveBat(BAT_DOWN);
         gameMovement.activateBallWithNpcMovement();
         ifSomeoneScoredUpdateIt();
