@@ -10,8 +10,6 @@ import java.util.logging.Logger;
 
 public class MykolasPingPongRules implements PingPongRules, Serializable {
     private static final Logger logger = Logger.getLogger(MykolasPingPongRules.class.getName());
-    public static final char BAT_UP = 'w';
-    public static final char BAT_DOWN = 's';
     public static final int BALL_PASSED_THE_LEFT_BAT = 0;
     public static final int BALL_PASSED_THE_RIGHT_BAT = 15;
 
@@ -99,14 +97,14 @@ public class MykolasPingPongRules implements PingPongRules, Serializable {
 
     @Override
     public void activateMoveUp() {
-        gameMovement.moveBat(BAT_UP);
+        gameMovement.movePlayerBatUp();
         gameMovement.activateBallWithNpcMovement();
         ifSomeoneScoredUpdateIt();
     }
 
     @Override
     public void activateMoveDown() {
-        gameMovement.moveBat(BAT_DOWN);
+        gameMovement.movePlayerBatDown();
         gameMovement.activateBallWithNpcMovement();
         ifSomeoneScoredUpdateIt();
     }

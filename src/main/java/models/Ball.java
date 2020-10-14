@@ -80,11 +80,19 @@ public class Ball implements Serializable, Drawable, Movable {
 
     @Override
     public int getNextPotentialVerticalXPoint() {
-        return 0;
+        if (getVerticalDirection() == 1) {
+            return getX() - 1;
+        } else {
+            return getX() + 1;
+        }
     }
 
     @Override
     public int getNextPotentialHorizontalYPoint() {
-        return 0;
+        if (getHorizontalDirection() == 2) {
+            return getY() + 1;
+        } else {
+            return getY() - 1;
+        }
     }
 }

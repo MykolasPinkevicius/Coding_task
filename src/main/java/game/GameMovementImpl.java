@@ -8,6 +8,8 @@ import util.Utilities;
 public class GameMovementImpl implements GameMovement {
     private static final int MOVING_UP = 1;
     private static final int MOVING_DOWN = -1;
+    public static final int PLAYER_BAT_MOVING_UP = -1;
+    public static final int PLAYER_BAT_MOVING_DOWN = 1;
     private PingPongTable pingPongTable;
     private Bat leftBat;
     private Bat rightBat;
@@ -23,87 +25,58 @@ public class GameMovementImpl implements GameMovement {
     @Override
     public void moveNPCBat() {
         if (ball.getX() > rightBat.getX2()) {
-            rightBat.setX1(rightBat.getX1() + MOVING_UP);
-            rightBat.setX2(rightBat.getX2() + MOVING_UP);
-            rightBat.setX3(rightBat.getX3() + MOVING_UP);
-        } else if (ball.getX() < rightBat.getX2()) {
-            rightBat.setX1(rightBat.getX1() + MOVING_DOWN);
-            rightBat.setX2(rightBat.getX2() + MOVING_DOWN);
-            rightBat.setX3(rightBat.getX3() + MOVING_DOWN);
+            setNewNPCBatPosition(MOVING_UP);
+        }
+        if (ball.getX() < rightBat.getX2()) {
+            setNewNPCBatPosition(MOVING_DOWN);
         }
     }
 
-    @Override
+    private void setNewNPCBatPosition(int npcBatMovingDirection) {
+        rightBat.setX1(rightBat.getX1() + npcBatMovingDirection);
+        rightBat.setX2(rightBat.getX2() + npcBatMovingDirection);
+        rightBat.setX3(rightBat.getX3() + npcBatMovingDirection);
+    }
+
     public void moveBall() {
-        switch(ball.getHorizontalDirection()){
-            case 1:
-                tryMoveBall(-1);
-                break;
-            case 2:
-                tryMoveBall(1);
-                break;
-            default:
-                throw new IllegalStateException("Bad ball movement " + ball.getHorizontalDirection());
+        if (pingPongTable.isBallBouncedToWall(ball.getNextPotentialVerticalXPoint(), ball.getNextPotentialHorizontalYPoint())) {
+            changeBallVerticalPositionAfterBumpingToWall();
+        } else {
+            moveBallItsDirection();
         }
     }
 
-    private void tryMoveBall(int moveY) {
-        if (!pingPongTable.isBallBouncedToWall(ball.getX() + whichDirectionBallGoes(ball.getVerticalDirection()), ball.getY() + moveY)) {
-            moveBallItsDirection(moveY);
-        } else if (pingPongTable.isBallBouncedToWall(ball.getX() + whichDirectionBallGoes(ball.getVerticalDirection()), ball.getY() + moveY)) {
-            if (ball.getVerticalDirection() == 3) {
-                ball.setVerticalDirection(1);
-                moveBallItsDirection(moveY);
-            } else if (ball.getVerticalDirection() == 1) {
-                ball.setVerticalDirection(3);
-                moveBallItsDirection(moveY);
-            }
+    private void changeBallVerticalPositionAfterBumpingToWall() {
+        if (ball.getVerticalDirection() == 3) {
+            ball.setVerticalDirection(1);
+        } else {
+            ball.setVerticalDirection(3);
         }
     }
 
-    private void moveBallItsDirection(int moveY) {
-        ball.setX(ball.getX() + whichDirectionBallGoes(ball.getVerticalDirection()));
-        ball.setY(ball.getY() + moveY);
-    }
-
-    private int whichDirectionBallGoes(int verticalDirection) {
-        int moveX;
-        switch(verticalDirection) {
-            case 1 : moveX = -1;
-                break;
-            case 3 : moveX = 1;
-                break;
-            default:  moveX = 0;
-                break;
-        }
-        return moveX;
+    private void moveBallItsDirection() {
+        ball.setX(ball.getNextPotentialVerticalXPoint());
+        ball.setY(ball.getNextPotentialHorizontalYPoint());
     }
 
     @Override
-    public void moveBat(char direction) {
-        switch (direction) {
-            case 's':
-                tryMoveBat(1, leftBat);
-                break;
-            case 'w' :
-                tryMoveBat(-1, leftBat);
-                break;
-            default :
-                throw new IllegalStateException("Bad bat movement ");
+    public void movePlayerBatUp() {
+        if (!pingPongTable.isBatBumpToWall(leftBat.getX1() + PLAYER_BAT_MOVING_UP, leftBat.getY())) {
+            setNewPlayerBatPosition(PLAYER_BAT_MOVING_UP);
         }
     }
 
-    private void tryMoveBat(int moveX, Bat bat) {
-        if (moveX == MOVING_UP && !pingPongTable.isBatBumpToWall(bat.getX3()+moveX,bat.getY())) {
-                bat.setX1(bat.getX1()+moveX);
-                bat.setX2(bat.getX2()+moveX);
-                bat.setX3(bat.getX3()+moveX);
+    @Override
+    public void movePlayerBatDown() {
+        if (!pingPongTable.isBatBumpToWall(leftBat.getX3() + PLAYER_BAT_MOVING_DOWN, leftBat.getY())) {
+            setNewPlayerBatPosition(PLAYER_BAT_MOVING_DOWN);
         }
-        if (moveX == MOVING_DOWN && !pingPongTable.isBatBumpToWall(bat.getX1()+moveX,bat.getY())) {
-                bat.setX1(bat.getX1()+moveX);
-                bat.setX2(bat.getX2()+moveX);
-                bat.setX3(bat.getX3()+moveX);
-        }
+    }
+
+    private void setNewPlayerBatPosition(int playerBatMovingUp) {
+        leftBat.setX1(leftBat.getX1() + playerBatMovingUp);
+        leftBat.setX2(leftBat.getX2() + playerBatMovingUp);
+        leftBat.setX3(leftBat.getX3() + playerBatMovingUp);
     }
 
     @Override
@@ -125,7 +98,7 @@ public class GameMovementImpl implements GameMovement {
     private void changeBallHorizontalDirection() {
         if (ball.getHorizontalDirection() == 1) {
             ball.setHorizontalDirection(2);
-        } else if (ball.getHorizontalDirection() == 2) {
+        } else {
             ball.setHorizontalDirection(1);
         }
     }

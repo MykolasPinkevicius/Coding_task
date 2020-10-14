@@ -68,7 +68,7 @@ public class StartGame {
         return new MykolasPingPongRulesBuilder()
                 .setLeftBat(new Bat(4, 5, 6, 1))
                 .setRightBat(new Bat(4, 5, 6, 13))
-                .setBall(new Ball(5, 7, Utilities.getRandomNumberForDirection(), Utilities.getRandomNumberForVerticalDirection()))
+                .setBall(new Ball(5, 7, Utilities.getRandomNumberForHorizontalDirection(), Utilities.getRandomNumberForVerticalDirection()))
                 .setScoreBoard(new ScoreBoard())
                 .setPingPongTable(new PingPongTable())
                 .build();
