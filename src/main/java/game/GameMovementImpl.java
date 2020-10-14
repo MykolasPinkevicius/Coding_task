@@ -6,10 +6,12 @@ import models.PingPongTable;
 import util.Utilities;
 
 public class GameMovementImpl implements GameMovement {
-    private static final int MOVING_UP = 1;
-    private static final int MOVING_DOWN = -1;
-    public static final int PLAYER_BAT_MOVING_UP = -1;
-    public static final int PLAYER_BAT_MOVING_DOWN = 1;
+    private static final int BAT_MOVING_UP = -1;
+    private static final int BAT_MOVING_DOWN = 1;
+    public static final int VERTICAL_DIRECTION_DOWN = 3;
+    public static final int VERTICAL_DIRECTION_UP = 1;
+    public static final int HORIZONTAL_DIRECTION_LEFT = 1;
+    public static final int HORIZONTAL_DIRECTION_RIGHT = 2;
     private PingPongTable pingPongTable;
     private Bat leftBat;
     private Bat rightBat;
@@ -25,10 +27,10 @@ public class GameMovementImpl implements GameMovement {
     @Override
     public void moveNPCBat() {
         if (ball.getX() > rightBat.getX2()) {
-            setNewNPCBatPosition(MOVING_UP);
+            setNewNPCBatPosition(BAT_MOVING_DOWN);
         }
         if (ball.getX() < rightBat.getX2()) {
-            setNewNPCBatPosition(MOVING_DOWN);
+            setNewNPCBatPosition(BAT_MOVING_UP);
         }
     }
 
@@ -47,10 +49,10 @@ public class GameMovementImpl implements GameMovement {
     }
 
     private void changeBallVerticalPositionAfterBumpingToWall() {
-        if (ball.getVerticalDirection() == 3) {
-            ball.setVerticalDirection(1);
+        if (ball.getVerticalDirection() == VERTICAL_DIRECTION_DOWN) {
+            ball.setVerticalDirection(VERTICAL_DIRECTION_UP);
         } else {
-            ball.setVerticalDirection(3);
+            ball.setVerticalDirection(VERTICAL_DIRECTION_DOWN);
         }
     }
 
@@ -61,22 +63,22 @@ public class GameMovementImpl implements GameMovement {
 
     @Override
     public void movePlayerBatUp() {
-        if (!pingPongTable.isBatBumpToWall(leftBat.getX1() + PLAYER_BAT_MOVING_UP, leftBat.getY())) {
-            setNewPlayerBatPosition(PLAYER_BAT_MOVING_UP);
+        if (!pingPongTable.isBatBumpToWall(leftBat.getX1() + BAT_MOVING_UP, leftBat.getY())) {
+            setNewPlayerBatPosition(BAT_MOVING_UP);
         }
     }
 
     @Override
     public void movePlayerBatDown() {
-        if (!pingPongTable.isBatBumpToWall(leftBat.getX3() + PLAYER_BAT_MOVING_DOWN, leftBat.getY())) {
-            setNewPlayerBatPosition(PLAYER_BAT_MOVING_DOWN);
+        if (!pingPongTable.isBatBumpToWall(leftBat.getX3() + BAT_MOVING_DOWN, leftBat.getY())) {
+            setNewPlayerBatPosition(BAT_MOVING_DOWN);
         }
     }
 
-    private void setNewPlayerBatPosition(int playerBatMovingUp) {
-        leftBat.setX1(leftBat.getX1() + playerBatMovingUp);
-        leftBat.setX2(leftBat.getX2() + playerBatMovingUp);
-        leftBat.setX3(leftBat.getX3() + playerBatMovingUp);
+    private void setNewPlayerBatPosition(int playerBatMove) {
+        leftBat.setX1(leftBat.getX1() + playerBatMove);
+        leftBat.setX2(leftBat.getX2() + playerBatMove);
+        leftBat.setX3(leftBat.getX3() + playerBatMove);
     }
 
     @Override
@@ -96,10 +98,10 @@ public class GameMovementImpl implements GameMovement {
     }
 
     private void changeBallHorizontalDirection() {
-        if (ball.getHorizontalDirection() == 1) {
-            ball.setHorizontalDirection(2);
+        if (ball.getHorizontalDirection() == HORIZONTAL_DIRECTION_LEFT) {
+            ball.setHorizontalDirection(HORIZONTAL_DIRECTION_RIGHT);
         } else {
-            ball.setHorizontalDirection(1);
+            ball.setHorizontalDirection(HORIZONTAL_DIRECTION_LEFT);
         }
     }
 
