@@ -62,27 +62,25 @@ public class MykolasPingPongRules implements PingPongRules, Serializable {
 
 
     @Override
-    public boolean pointScored(Bat bat) {
-        return !gameMovement.isBallKnockedByBat(ball, bat) && pingPongTable.isBallEscaped(ball.getX(), ball.getY());
+    public void activateMoveUp() {
+        gameMovement.movePlayerBatUp();
+        gameMovement.activateBallWithNpcMovement();
+        ifSomeoneScoredUpdateIt();
     }
 
-    private String whichPlayerScored() {
-        if (ball.getY() == BALL_PASSED_THE_LEFT_BAT && !gameMovement.isBallKnockedByBat(ball, leftBat)) {
-            return "RightBat";
-        } else if (ball.getY() == BALL_PASSED_THE_RIGHT_BAT && !gameMovement.isBallKnockedByBat(ball, rightBat)){
-            return "LeftBat";
+    @Override
+    public void activateMoveDown() {
+        gameMovement.movePlayerBatDown();
+        gameMovement.activateBallWithNpcMovement();
+        ifSomeoneScoredUpdateIt();
+    }
+
+    private void ifSomeoneScoredUpdateIt() {
+        if (someoneScored()) {
+            updateScore();
+            displayScore();
+            resetGameItemPositions();
         }
-        return "Something not right";
-    }
-
-    @Override
-    public boolean someoneScored() {
-        return pointScored(leftBat) || pointScored(rightBat);
-    }
-
-    @Override
-    public void displayScore() {
-        logger.info("Ball is out: Score is " + "Left bat " + scoreBoard.getLeftBatScore() + " : " + "Right Bat " + scoreBoard.getRightBatScore());
     }
 
     @Override
@@ -96,17 +94,33 @@ public class MykolasPingPongRules implements PingPongRules, Serializable {
     }
 
     @Override
-    public void activateMoveUp() {
-        gameMovement.movePlayerBatUp();
-        gameMovement.activateBallWithNpcMovement();
-        ifSomeoneScoredUpdateIt();
+    public void displayScore() {
+        logger.info("Ball is out: Score is " + "Left bat " + scoreBoard.getLeftBatScore() + " : " + "Right Bat " + scoreBoard.getRightBatScore());
+    }
+
+    private void resetGameItemPositions() {
+        resetBallPositions();
+        resetLeftBatPosition();
+        resetRightBatPosition();
+    }
+
+    private String whichPlayerScored() {
+        if (ball.getY() == BALL_PASSED_THE_LEFT_BAT && !gameMovement.isBallKnockedByBat(ball, leftBat)) {
+            return "RightBat";
+        } else if (ball.getY() == BALL_PASSED_THE_RIGHT_BAT && !gameMovement.isBallKnockedByBat(ball, rightBat)){
+            return "LeftBat";
+        }
+        return "Something not right";
     }
 
     @Override
-    public void activateMoveDown() {
-        gameMovement.movePlayerBatDown();
-        gameMovement.activateBallWithNpcMovement();
-        ifSomeoneScoredUpdateIt();
+    public boolean pointScored(Bat bat) {
+        return !gameMovement.isBallKnockedByBat(ball, bat) && pingPongTable.isBallEscaped(ball.getX(), ball.getY());
+    }
+
+    @Override
+    public boolean someoneScored() {
+        return pointScored(leftBat) || pointScored(rightBat);
     }
 
     @Override
@@ -124,20 +138,6 @@ public class MykolasPingPongRules implements PingPongRules, Serializable {
     public void skipMove() {
         gameMovement.activateBallWithNpcMovement();
         ifSomeoneScoredUpdateIt();
-    }
-
-    private void ifSomeoneScoredUpdateIt() {
-        if (someoneScored()) {
-            updateScore();
-            displayScore();
-            resetGameItemPositions();
-        }
-    }
-
-    private void resetGameItemPositions() {
-        resetBallPositions();
-        resetLeftBatPosition();
-        resetRightBatPosition();
     }
 
     private void resetBallPositions() {
