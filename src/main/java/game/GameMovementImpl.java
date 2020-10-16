@@ -34,18 +34,18 @@ public class GameMovementImpl implements GameMovement {
         }
     }
 
-    private void setNewNPCBatPosition(int npcBatMovingDirection) {
-        rightBat.setX1(rightBat.getX1() + npcBatMovingDirection);
-        rightBat.setX2(rightBat.getX2() + npcBatMovingDirection);
-        rightBat.setX3(rightBat.getX3() + npcBatMovingDirection);
-    }
-
     public void moveBall() {
         if (pingPongTable.isBallBouncedToWall(ball.getNextPotentialVerticalXPoint(), ball.getNextPotentialHorizontalYPoint())) {
             changeBallVerticalPositionAfterBumpingToWall();
         } else {
             moveBallItsDirection();
         }
+    }
+
+    private void setNewNPCBatPosition(int npcBatMovingDirection) {
+        rightBat.setX1(rightBat.getX1() + npcBatMovingDirection);
+        rightBat.setX2(rightBat.getX2() + npcBatMovingDirection);
+        rightBat.setX3(rightBat.getX3() + npcBatMovingDirection);
     }
 
     private void changeBallVerticalPositionAfterBumpingToWall() {

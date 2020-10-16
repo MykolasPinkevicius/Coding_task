@@ -18,9 +18,9 @@ public class SaveGameOperation implements UserInputOperation {
 
     @Override
     public void execute(){
-        try (FileOutputStream fileOut = new FileOutputStream(SAVED_GAME_FILE);
-        ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
-            out.writeObject(mykolasPingPongRules);
+        try (FileOutputStream fileSave = new FileOutputStream(SAVED_GAME_FILE);
+        ObjectOutputStream objectSaveToFile = new ObjectOutputStream(fileSave)) {
+            objectSaveToFile.writeObject(mykolasPingPongRules);
             logger.info("Game saved in game.ser file");
         } catch (IOException e) {
             logger.info(e.getMessage());

@@ -18,9 +18,9 @@ public class ResumeGameOperation implements UserInputOperation {
 
     @Override
     public void execute(){
-        try (FileInputStream fileIn = new FileInputStream(SAVED_GAME_FILE);
-        ObjectInputStream in = new ObjectInputStream(fileIn)) {
-            MykolasPingPongRules lastGame = (MykolasPingPongRules) in.readObject();
+        try (FileInputStream fileOpen = new FileInputStream(SAVED_GAME_FILE);
+        ObjectInputStream objectOpenFromFile = new ObjectInputStream(fileOpen)) {
+            MykolasPingPongRules lastGame = (MykolasPingPongRules) objectOpenFromFile.readObject();
             mykolasPingPongRules.returnLastGameData(lastGame);
         } catch (IOException | ClassNotFoundException e) {
             logger.info(e.getMessage());

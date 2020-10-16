@@ -23,7 +23,6 @@ public class StartGame {
     }
 
     public static void startGame() {
-
         MykolasPingPongRules mykolasPingPongRules = initialiseRules();
         CommandFactory commandFactory = new CommandFactory();
         Renderer renderer = new Renderer();
@@ -49,7 +48,7 @@ public class StartGame {
         try {
             commandFactory.getCommand(userInput, mykolasPingPongRules).execute();
         } catch (IllegalStateException e) {
-            logger.info("we catched the wrong input \n you should choose from defined commands\n");
+            logger.info("we caught the wrong input \n you should choose from defined commands\n");
         }
     }
 
@@ -57,7 +56,7 @@ public class StartGame {
         renderer.drawMap(List.of(mykolasPingPongRules.getLeftBat(), mykolasPingPongRules.getRightBat(), mykolasPingPongRules.getBall()));
     }
 
-    private static char continueGame(CommandFactory commandFactory, Renderer renderer, Scanner scanner, MykolasPingPongRules mykolasPingPongRules){
+    private static char continueGame(CommandFactory commandFactory, Renderer renderer, Scanner scanner, MykolasPingPongRules mykolasPingPongRules) {
         drawGame(mykolasPingPongRules, renderer);
         char userInput = getInput(scanner);
         executeCommand(mykolasPingPongRules, commandFactory, userInput);
