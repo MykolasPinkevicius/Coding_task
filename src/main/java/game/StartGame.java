@@ -19,27 +19,20 @@ public class StartGame {
     public static final char FIRST_MOVE = 'f';
 
     public static void main(String[] args) {
-        startGame();
+        initializeGame();
     }
 
-    public static void startGame() {
-        MykolasPingPongRules mykolasPingPongRules = initialiseRules();
-        CommandFactory commandFactory = new CommandFactory();
-        Renderer renderer = new Renderer();
-        Scanner scanner = new Scanner(System.in);
-        try (scanner) {
-            startGameUntilQuited(mykolasPingPongRules, commandFactory, renderer, scanner);
-        }
-    }
-
-    private static void startGameUntilQuited(MykolasPingPongRules mykolasPingPongRules, CommandFactory commandFactory, Renderer renderer, Scanner scanner) {
+    public static void initializeGame() {
         char move = FIRST_MOVE;
-        while (move != QUIT) {
-            move = continueGame(commandFactory, renderer, scanner, mykolasPingPongRules);
+        Scanner scanner = initializeScanner();
+        try (scanner) {
+            while (move != QUIT) {
+                move = startGame(initializeCommandFactory(), initializeRenderer(), scanner, initializeRules());
+            }
         }
     }
 
-    private static char continueGame(CommandFactory commandFactory, Renderer renderer, Scanner scanner, MykolasPingPongRules mykolasPingPongRules) {
+    private static char startGame(CommandFactory commandFactory, Renderer renderer, Scanner scanner, MykolasPingPongRules mykolasPingPongRules) {
         drawGame(mykolasPingPongRules, renderer);
         char userInput = getInput(scanner);
         executeCommand(mykolasPingPongRules, commandFactory, userInput);
@@ -63,7 +56,7 @@ public class StartGame {
         }
     }
 
-    private static MykolasPingPongRules initialiseRules() {
+    private static MykolasPingPongRules initializeRules() {
         return new MykolasPingPongRulesBuilder()
                 .setLeftBat(new Bat(4, 5, 6, 1))
                 .setRightBat(new Bat(4, 5, 6, 13))
@@ -71,5 +64,17 @@ public class StartGame {
                 .setScoreBoard(new ScoreBoard())
                 .setPingPongTable(new PingPongTable())
                 .build();
+    }
+
+    private static CommandFactory initializeCommandFactory() {
+        return new CommandFactory();
+    }
+
+    private static Renderer initializeRenderer() {
+        return new Renderer();
+    }
+
+    private static Scanner initializeScanner() {
+        return new Scanner(System.in);
     }
 }
