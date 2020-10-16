@@ -34,7 +34,10 @@ public class StartGame {
     }
 
     private static void drawGame(MykolasPingPongGame game) {
-        game.getRenderer().drawMap(List.of(game.getMykolasPingPongRules().getLeftBat(), game.getMykolasPingPongRules().getRightBat(), game.getMykolasPingPongRules().getBall()));
+        game.getRenderer().drawMap(List.of(
+                game.getMykolasPingPongRules().getLeftBat(),
+                game.getMykolasPingPongRules().getRightBat(),
+                game.getMykolasPingPongRules().getBall()));
     }
 
     private static char getInput(Scanner scanner) {
