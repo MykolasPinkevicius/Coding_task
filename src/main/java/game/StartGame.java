@@ -24,10 +24,13 @@ public class StartGame {
 
     public static void initializeGame() {
         char move = FIRST_MOVE;
+        MykolasPingPongRules mykolasPingPongRules = initializeRules();
+        Renderer renderer = initializeRenderer();
         Scanner scanner = initializeScanner();
+        CommandFactory commandFactory = initializeCommandFactory();
         try (scanner) {
             while (move != QUIT) {
-                move = startGame(initializeCommandFactory(), initializeRenderer(), scanner, initializeRules());
+                move = startGame(commandFactory, renderer, scanner, mykolasPingPongRules);
             }
         }
     }
