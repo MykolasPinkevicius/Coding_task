@@ -39,6 +39,17 @@ public class StartGame {
         }
     }
 
+    private static char continueGame(CommandFactory commandFactory, Renderer renderer, Scanner scanner, MykolasPingPongRules mykolasPingPongRules) {
+        drawGame(mykolasPingPongRules, renderer);
+        char userInput = getInput(scanner);
+        executeCommand(mykolasPingPongRules, commandFactory, userInput);
+        return userInput;
+    }
+
+    private static void drawGame(MykolasPingPongRules mykolasPingPongRules, Renderer renderer) {
+        renderer.drawMap(List.of(mykolasPingPongRules.getLeftBat(), mykolasPingPongRules.getRightBat(), mykolasPingPongRules.getBall()));
+    }
+
     private static char getInput(Scanner scanner) {
         logger.info("Input 'w' to make bat go up, 's' to go down, 'f' to skip move, \n't' to save the game, 'r' to resume the last saved game, 'q' to quit game");
         return scanner.next().charAt(0);
@@ -50,17 +61,6 @@ public class StartGame {
         } catch (IllegalStateException e) {
             logger.info("we caught the wrong input \n you should choose from defined commands\n");
         }
-    }
-
-    private static void drawGame(MykolasPingPongRules mykolasPingPongRules, Renderer renderer) {
-        renderer.drawMap(List.of(mykolasPingPongRules.getLeftBat(), mykolasPingPongRules.getRightBat(), mykolasPingPongRules.getBall()));
-    }
-
-    private static char continueGame(CommandFactory commandFactory, Renderer renderer, Scanner scanner, MykolasPingPongRules mykolasPingPongRules) {
-        drawGame(mykolasPingPongRules, renderer);
-        char userInput = getInput(scanner);
-        executeCommand(mykolasPingPongRules, commandFactory, userInput);
-        return userInput;
     }
 
     private static MykolasPingPongRules initialiseRules() {
